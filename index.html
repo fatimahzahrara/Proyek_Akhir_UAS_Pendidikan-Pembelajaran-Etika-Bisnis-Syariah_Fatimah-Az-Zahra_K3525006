@@ -1,0 +1,2511 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Modul Pembelajaran Etika Bisnis Syariah — Pelajari prinsip-prinsip bisnis dalam Islam secara interaktif. Dilengkapi dalil Al-Qur'an, Hadits, studi kasus, dan kuis.">
+    <meta name="keywords" content="etika bisnis syariah, muamalah, akhlaq bisnis, zakat, perdagangan halal, perbankan syariah, kemitraan bisnis Islam">
+    <meta name="author" content="Fatimah Az-Zahra — K3525006">
+    <title>Modul Pembelajaran Etika Bisnis Syariah</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========== CSS RESET & VARIABLES ========== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --teal: #1D9E75;
+            --blue: #378ADD;
+            --teal-dark: #167a5a;
+            --blue-dark: #2a6db5;
+            --gradient: linear-gradient(135deg, #1D9E75, #378ADD);
+            --gradient-reverse: linear-gradient(135deg, #378ADD, #1D9E75);
+            --gradient-vertical: linear-gradient(180deg, #1D9E75, #378ADD);
+            --gradient-soft: linear-gradient(135deg, rgba(29,158,117,0.08), rgba(55,138,221,0.08));
+            --glass-bg: rgba(255,255,255,0.08);
+            --glass-border: rgba(255,255,255,0.15);
+            --dark-bg: #0a1628;
+            --dark-card: #111d33;
+            --dark-card2: #152540;
+            --text-primary: #e8f0fe;
+            --text-secondary: #94a7c6;
+            --text-muted: #5a7196;
+            --gold: #D4A853;
+            --gold-light: #F0D48A;
+            --success: #2dd4a8;
+            --danger: #f87171;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-lg: 24px;
+            --shadow: 0 8px 32px rgba(0,0,0,0.3);
+            --shadow-lg: 0 16px 48px rgba(0,0,0,0.4);
+            --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-body: 'Inter', sans-serif;
+            --font-heading: 'Outfit', sans-serif;
+            --font-arabic: 'Amiri', serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ========== SCROLLBAR ========== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb { background: var(--gradient); border-radius: 8px; }
+
+        /* ========== GLOBAL PATTERNS ========== */
+        .islamic-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(29,158,117,0.06) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(55,138,221,0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .geometric-decoration {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 1px solid rgba(29,158,117,0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(29,158,117,0.2); }
+            50% { box-shadow: 0 0 40px rgba(29,158,117,0.4); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        @keyframes rotate-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== LAYER 1: NAVBAR ========== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: var(--transition);
+        }
+        .navbar.scrolled {
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 10px 0;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .navbar-logo {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+            font-weight: 700;
+            font-family: var(--font-arabic);
+            box-shadow: 0 4px 16px rgba(29,158,117,0.3);
+        }
+        .navbar-title {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+        .navbar-title span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* LAYER 2: Menu utama kiri-kanan */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.92rem;
+            padding: 8px 18px;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+            background: rgba(29,158,117,0.12);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: var(--transition);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 60%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 8px;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 2.5px;
+            background: var(--text-primary);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translateY(7.5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translateY(-7.5px); }
+
+        /* ========== CONTAINER ========== */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== SECTION HEADER ========== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 20px;
+            background: rgba(29,158,117,0.1);
+            border: 1px solid rgba(29,158,117,0.2);
+            border-radius: 100px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--teal);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+        .section-title .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-subtitle {
+            font-size: 1.08rem;
+            color: var(--text-secondary);
+            max-width: 640px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ========== LAYER 1: HERO / BERANDA ========== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding: 120px 0 80px;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg,
+                rgba(10,22,40,0.3) 0%,
+                rgba(10,22,40,0.85) 50%,
+                var(--dark-bg) 100%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .hero-text {
+            animation: fadeInLeft 1s ease;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(29,158,117,0.12);
+            border: 1px solid rgba(29,158,117,0.25);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--teal);
+            margin-bottom: 24px;
+        }
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--teal);
+            animation: pulse-glow 2s infinite;
+        }
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+        .hero h1 .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 36px;
+            max-width: 520px;
+        }
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* Hadits Card in Hero */
+        .hero-hadits-card {
+            animation: fadeInRight 1s ease 0.3s both;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-hadits-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: var(--gradient);
+        }
+        .hero-hadits-card .ornament {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 4rem;
+            opacity: 0.06;
+            color: var(--gold);
+            font-family: var(--font-arabic);
+        }
+        .hadits-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+        .hadits-arab {
+            font-family: var(--font-arabic);
+            font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+            line-height: 2;
+            color: var(--text-primary);
+            text-align: right;
+            direction: rtl;
+            margin-bottom: 20px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .hadits-transliterasi {
+            font-style: italic;
+            color: var(--teal);
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+        .hadits-terjemahan {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .hadits-sumber {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .hadits-sumber::before {
+            content: '📖';
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 4px 20px rgba(29,158,117,0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(29,158,117,0.4);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1.5px solid rgba(255,255,255,0.15);
+        }
+        .btn-outline:hover {
+            border-color: var(--teal);
+            background: rgba(29,158,117,0.08);
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: #1a1a2e;
+            font-weight: 700;
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212,168,83,0.4);
+        }
+        .btn-sm {
+            padding: 10px 22px;
+            font-size: 0.88rem;
+        }
+
+        /* ========== STATISTICS BAR ========== */
+        .stats-bar {
+            padding: 48px 0;
+            position: relative;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 28px 16px;
+            background: var(--dark-card);
+            border-radius: var(--radius);
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: var(--transition);
+        }
+        .stat-item:hover {
+            border-color: rgba(29,158,117,0.2);
+            transform: translateY(-4px);
+        }
+        .stat-number {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+        }
+        .stat-label {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ========== LAYER 3: SUB-MODUL (atas-bawah) ========== */
+        .submodul-section {
+            padding: 100px 0;
+            position: relative;
+        }
+        .submodul-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+        }
+        .submodul-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: var(--radius);
+            padding: 36px 28px;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .submodul-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+        .submodul-card:hover::before {
+            transform: scaleX(1);
+        }
+        .submodul-card:hover {
+            border-color: rgba(29,158,117,0.25);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+        }
+        .submodul-icon {
+            width: 68px;
+            height: 68px;
+            margin: 0 auto 20px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: rgba(29,158,117,0.1);
+            transition: var(--transition);
+        }
+        .submodul-card:hover .submodul-icon {
+            background: var(--gradient);
+            transform: scale(1.1);
+        }
+        .submodul-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.18rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.3px;
+        }
+        .submodul-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        .submodul-number {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 900;
+            opacity: 0.04;
+            color: var(--teal);
+        }
+
+        /* ========== LAYER 4: DETAIL MODUL (kiri-kanan) ========== */
+        .detail-section {
+            padding: 100px 0;
+            position: relative;
+        }
+        .detail-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+            margin-bottom: 80px;
+        }
+        .detail-row:last-child { margin-bottom: 0; }
+        .detail-row.reverse { direction: rtl; }
+        .detail-row.reverse > * { direction: ltr; }
+
+        .detail-text h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+        .detail-text p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        /* Hadits Card */
+        .hadits-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--radius);
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 28px;
+        }
+        .hadits-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--gradient-vertical);
+        }
+        .hadits-card .hadits-arab {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+        }
+
+        /* Infographic Card */
+        .infographic-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .infographic-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+        }
+        .infographic-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+        .infographic-card .info-content {
+            padding: 24px;
+        }
+        .infographic-card h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .infographic-card p {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Principles List */
+        .prinsip-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .prinsip-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 18px 22px;
+            background: var(--dark-card);
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: var(--transition);
+        }
+        .prinsip-list li:hover {
+            border-color: rgba(29,158,117,0.2);
+            transform: translateX(8px);
+        }
+        .prinsip-list .icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            border-radius: 10px;
+            background: rgba(29,158,117,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+        .prinsip-list .text h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.98rem;
+            margin-bottom: 4px;
+        }
+        .prinsip-list .text p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Quiz Section */
+        .quiz-card {
+            background: var(--dark-card2);
+            border: 1px solid rgba(29,158,117,0.15);
+            border-radius: var(--radius);
+            padding: 36px;
+            margin-top: 28px;
+        }
+        .quiz-card h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quiz-card .quiz-question {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            border: 1.5px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.92rem;
+        }
+        .quiz-option:hover {
+            border-color: rgba(29,158,117,0.3);
+            background: rgba(29,158,117,0.06);
+        }
+        .quiz-option.selected {
+            border-color: var(--teal);
+            background: rgba(29,158,117,0.1);
+        }
+        .quiz-option.correct {
+            border-color: var(--success);
+            background: rgba(45,212,168,0.1);
+        }
+        .quiz-option.wrong {
+            border-color: var(--danger);
+            background: rgba(248,113,113,0.1);
+        }
+        .quiz-option .radio {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        .quiz-option.selected .radio {
+            border-color: var(--teal);
+        }
+        .quiz-option.selected .radio::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--teal);
+        }
+        .quiz-option.correct .radio {
+            border-color: var(--success);
+            background: var(--success);
+        }
+        .quiz-option.correct .radio::after {
+            content: '✓';
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        .quiz-feedback {
+            padding: 14px 20px;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: none;
+        }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct-fb {
+            background: rgba(45,212,168,0.1);
+            border: 1px solid rgba(45,212,168,0.2);
+            color: var(--success);
+        }
+        .quiz-feedback.wrong-fb {
+            background: rgba(248,113,113,0.1);
+            border: 1px solid rgba(248,113,113,0.2);
+            color: var(--danger);
+        }
+
+        /* ========== LAYER 5: STUDI KASUS (atas-bawah) ========== */
+        .studikasus-section {
+            padding: 100px 0;
+            position: relative;
+            background: linear-gradient(180deg, var(--dark-bg), var(--dark-card), var(--dark-bg));
+        }
+        .studikasus-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+            position: relative;
+        }
+        .studikasus-timeline::before {
+            content: '';
+            position: absolute;
+            left: 32px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient-vertical);
+            opacity: 0.3;
+        }
+        .studikasus-item {
+            display: grid;
+            grid-template-columns: 64px 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+        .studikasus-marker {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--dark-card);
+            border: 2px solid rgba(29,158,117,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 1;
+            position: relative;
+        }
+        .studikasus-content {
+            background: var(--dark-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        .studikasus-content:hover {
+            border-color: rgba(29,158,117,0.2);
+            box-shadow: var(--shadow);
+        }
+        .studikasus-img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+        .studikasus-body {
+            padding: 32px;
+        }
+        .studikasus-body .case-badge {
+            display: inline-flex;
+            padding: 4px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        .case-badge.halal { background: rgba(29,158,117,0.15); color: var(--teal); }
+        .case-badge.syariah { background: rgba(55,138,221,0.15); color: var(--blue); }
+        .case-badge.kemitraan { background: rgba(212,168,83,0.15); color: var(--gold); }
+
+        .studikasus-body h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 14px;
+            letter-spacing: -0.3px;
+        }
+        .studikasus-body p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .key-points {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .key-points li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .key-points li::before {
+            content: '✦';
+            color: var(--teal);
+            font-size: 0.8rem;
+        }
+        /* Hadits in studi kasus */
+        .case-hadits {
+            background: rgba(29,158,117,0.05);
+            border-left: 3px solid var(--teal);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 20px 24px;
+            margin-top: 16px;
+        }
+        .case-hadits .hadits-arab {
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+        }
+
+        /* ========== LAYER 6: REFERENSI (kiri-kanan) ========== */
+        .referensi-section {
+            padding: 100px 0;
+            position: relative;
+        }
+        .referensi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .referensi-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--radius);
+            padding: 36px;
+            transition: var(--transition);
+        }
+        .referensi-card:hover {
+            border-color: rgba(29,158,117,0.2);
+        }
+        .referensi-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .dalil-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .dalil-item {
+            padding: 18px 20px;
+            background: rgba(255,255,255,0.02);
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: var(--transition);
+        }
+        .dalil-item:hover {
+            border-color: rgba(29,158,117,0.15);
+        }
+        .dalil-item .dalil-ref {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .dalil-item .dalil-arab {
+            font-family: var(--font-arabic);
+            font-size: 1.2rem;
+            line-height: 1.9;
+            direction: rtl;
+            text-align: right;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        .dalil-item .dalil-transliterasi {
+            font-style: italic;
+            color: var(--teal);
+            font-size: 0.88rem;
+            margin-bottom: 6px;
+        }
+        .dalil-item .dalil-terjemahan {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Download & Glosarium */
+        .download-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .download-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.02);
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: var(--transition);
+        }
+        .download-item:hover {
+            border-color: rgba(29,158,117,0.2);
+            background: rgba(29,158,117,0.04);
+        }
+        .download-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .download-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(248,113,113,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .download-info h4 {
+            font-size: 0.92rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .download-info span {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+        .download-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--teal);
+            background: rgba(29,158,117,0.1);
+            border: 1px solid rgba(29,158,117,0.2);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        .download-btn:hover {
+            background: var(--teal);
+            color: white;
+        }
+
+        .glosarium-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .glosarium-item {
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.02);
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        .glosarium-item dt {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+            color: var(--teal);
+        }
+        .glosarium-item .arabic-term {
+            font-family: var(--font-arabic);
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-left: 8px;
+        }
+        .glosarium-item dd {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ========== LAYER 7: FOOTER ========== */
+        .footer {
+            position: relative;
+            padding: 80px 0 0;
+            background: var(--dark-card);
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        .footer-brand .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .footer-brand .footer-logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-family: var(--font-arabic);
+            font-weight: 700;
+        }
+        .footer-brand .footer-logo-text {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.15rem;
+        }
+        .footer-brand p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+        .social-link {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+        .social-link:hover {
+            border-color: var(--teal);
+            color: var(--teal);
+            background: rgba(29,158,117,0.08);
+            transform: translateY(-3px);
+        }
+        .footer-col h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer-col ul a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            transition: var(--transition);
+        }
+        .footer-col ul a:hover {
+            color: var(--teal);
+            padding-left: 6px;
+        }
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .footer-contact-item .fc-icon {
+            font-size: 1rem;
+            margin-top: 2px;
+        }
+        .footer-contact-item span {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .footer-bottom {
+            padding: 24px 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .footer-bottom p {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        .footer-bottom p a {
+            color: var(--teal);
+            text-decoration: none;
+        }
+
+        /* ========== BACK TO TOP ========== */
+        .back-to-top {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(29,158,117,0.3);
+        }
+        .back-to-top.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(29,158,117,0.4);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .hero-content { grid-template-columns: 1fr; gap: 40px; }
+            .hero-hadits-card { max-width: 600px; }
+            .detail-row { grid-template-columns: 1fr; gap: 36px; }
+            .detail-row.reverse { direction: ltr; }
+            .referensi-grid { grid-template-columns: 1fr; }
+            .submodul-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: rgba(10,22,40,0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 24px;
+                gap: 4px;
+                transform: translateY(-20px);
+                opacity: 0;
+                pointer-events: none;
+                transition: var(--transition);
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+            }
+            .nav-links.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .nav-links a {
+                width: 100%;
+                padding: 14px 20px;
+                text-align: left;
+            }
+            .hamburger { display: flex; }
+
+            .submodul-grid { grid-template-columns: 1fr; }
+            .studikasus-timeline::before { display: none; }
+            .studikasus-item { grid-template-columns: 1fr; gap: 16px; }
+            .studikasus-marker {
+                width: 48px;
+                height: 48px;
+                font-size: 1.2rem;
+            }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .hero-cta { flex-direction: column; }
+            .hero-cta .btn { width: 100%; justify-content: center; }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 1.8rem; }
+            .hero h1 { font-size: 2rem; }
+            .container { padding: 0 16px; }
+        }
+
+        /* ========== TAB NAVIGATION ========== */
+        .tab-nav {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 32px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        .tab-btn {
+            padding: 10px 24px;
+            border: 1.5px solid rgba(255,255,255,0.08);
+            border-radius: 100px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--gradient);
+            color: white;
+            border-color: transparent;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+        .tab-content.active { display: block; }
+
+        /* ========== DECORATIVE DIVIDER ========== */
+        .section-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(29,158,117,0.2), rgba(55,138,221,0.2), transparent);
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ LAYER 2: NAVBAR + Menu Utama kiri-kanan ============ -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#beranda" class="navbar-brand">
+                <div class="navbar-logo">ب</div>
+                <div class="navbar-title">Etika Bisnis <span>Syariah</span></div>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#beranda" class="active">Beranda</a></li>
+                <li><a href="#modul">Modul</a></li>
+                <li><a href="#prinsip">Prinsip</a></li>
+                <li><a href="#studikasus">Studi Kasus</a></li>
+                <li><a href="#referensi">Referensi</a></li>
+                <li><a href="#tentang">Tentang</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu navigasi">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ============ LAYER 1: HERO / BERANDA ============ -->
+    <section class="hero" id="beranda">
+        <div class="hero-bg">
+            <img src="images/hero-islamic-market.png" alt="Pasar Islami Modern">
+        </div>
+        <div class="islamic-pattern"></div>
+        <div class="container">
+            <div class="hero-content">
+                <!-- Hero Text -->
+                <div class="hero-text">
+                    <div class="hero-badge">
+                        <span class="dot"></span>
+                        Modul Pembelajaran Interaktif
+                    </div>
+                    <h1>
+                        Etika Bisnis<br>
+                        <span class="gradient-text">Syariah</span>
+                    </h1>
+                    <p class="hero-description">
+                        Pelajari fondasi etika bisnis dalam Islam secara komprehensif. 
+                        Dari prinsip muamalah, akhlaq dalam berdagang, hingga implementasi 
+                        zakat — semuanya berlandaskan Al-Qur'an dan Sunnah Rasulullah ﷺ.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#modul" class="btn btn-primary">
+                            📘 Mulai Belajar
+                        </a>
+                        <a href="#studikasus" class="btn btn-outline">
+                            📋 Lihat Studi Kasus
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hadits Card -->
+                <div class="hero-hadits-card">
+                    <div class="ornament">﷽</div>
+                    <div class="hadits-label">✦ Hadits Pilihan</div>
+                    <div class="hadits-arab">
+                        التَّاجِرُ الصَّدُوقُ الْأَمِينُ مَعَ النَّبِيِّينَ وَالصِّدِّيقِينَ وَالشُّهَدَاءِ
+                    </div>
+                    <div class="hadits-transliterasi">
+                        "At-tājiru ash-shadūqu al-amīnu ma'an-nabiyyīna wash-shiddīqīna wasy-syuhadā'."
+                    </div>
+                    <div class="hadits-terjemahan">
+                        "Pedagang yang jujur dan terpercaya akan bersama para Nabi, orang-orang yang jujur (shiddiqin), dan para syuhada (di hari kiamat)."
+                    </div>
+                    <div class="hadits-sumber">HR. At-Tirmidzi, No. 1209</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ STATISTICS BAR ============ -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item animate-on-scroll">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Modul Lengkap</div>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">Dalil Al-Qur'an & Hadits</div>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Studi Kasus Nyata</div>
+                </div>
+                <div class="stat-item animate-on-scroll">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Keberkahan Ilmu</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============ LAYER 3: SUB-MODUL (atas-bawah) ============ -->
+    <section class="submodul-section" id="modul">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-badge">📚 Sub-Modul</div>
+                <h2 class="section-title">
+                    Empat Pilar <span class="gradient-text">Pembelajaran</span>
+                </h2>
+                <p class="section-subtitle">
+                    Modul disusun secara sistematis dari pengantar hingga implementasi praktis zakat dalam bisnis.
+                </p>
+            </div>
+            <div class="submodul-grid">
+                <div class="submodul-card animate-on-scroll" onclick="scrollToTab('pengantar')">
+                    <span class="submodul-number">01</span>
+                    <div class="submodul-icon">📖</div>
+                    <h3>Pengantar</h3>
+                    <p>Dasar-dasar etika bisnis dalam perspektif Islam dan landasan hukumnya.</p>
+                </div>
+                <div class="submodul-card animate-on-scroll" onclick="scrollToTab('muamalah')">
+                    <span class="submodul-number">02</span>
+                    <div class="submodul-icon">🤝</div>
+                    <h3>Muamalah</h3>
+                    <p>Hukum dan tata cara transaksi jual-beli yang sesuai syariah.</p>
+                </div>
+                <div class="submodul-card animate-on-scroll" onclick="scrollToTab('akhlaq')">
+                    <span class="submodul-number">03</span>
+                    <div class="submodul-icon">🕌</div>
+                    <h3>Akhlaq</h3>
+                    <p>Perilaku dan budi pekerti mulia seorang pebisnis Muslim.</p>
+                </div>
+                <div class="submodul-card animate-on-scroll" onclick="scrollToTab('zakat')">
+                    <span class="submodul-number">04</span>
+                    <div class="submodul-icon">💎</div>
+                    <h3>Zakat</h3>
+                    <p>Kewajiban zakat perdagangan dan distribusi kesejahteraan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============ LAYER 4: DETAIL MODUL (kiri-kanan) ============ -->
+    <section class="detail-section" id="prinsip">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-badge">📜 Detail Materi</div>
+                <h2 class="section-title">
+                    Materi <span class="gradient-text">Pembelajaran</span>
+                </h2>
+                <p class="section-subtitle">
+                    Pelajari setiap modul secara mendalam dengan dalil dan penjelasan komprehensif.
+                </p>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tab-nav animate-on-scroll" id="tabNav">
+                <button class="tab-btn active" data-tab="pengantar">📖 Pengantar</button>
+                <button class="tab-btn" data-tab="muamalah">🤝 Muamalah</button>
+                <button class="tab-btn" data-tab="akhlaq">🕌 Akhlaq</button>
+                <button class="tab-btn" data-tab="zakat">💎 Zakat</button>
+            </div>
+
+            <!-- Tab: Pengantar -->
+            <div class="tab-content active" id="tab-pengantar">
+                <div class="detail-row animate-on-scroll">
+                    <div class="detail-text">
+                        <h3>Pengantar Etika Bisnis Syariah</h3>
+                        <p>
+                            Etika bisnis syariah adalah seperangkat norma dan nilai-nilai moral yang bersumber dari 
+                            Al-Qur'an dan Sunnah untuk mengatur aktivitas ekonomi dan perdagangan. Islam tidak memisahkan 
+                            antara kegiatan ibadah dan kegiatan muamalah (sosial-ekonomi).
+                        </p>
+                        <p>
+                            Dalam pandangan Islam, bisnis bukan sekadar mencari keuntungan material, tetapi juga 
+                            merupakan bagian dari ibadah kepada Allah SWT. Oleh karena itu, setiap pelaku bisnis 
+                            Muslim wajib menjaga etika dan moralitas dalam setiap transaksinya.
+                        </p>
+                        <ul class="prinsip-list">
+                            <li>
+                                <div class="icon">⚖️</div>
+                                <div class="text">
+                                    <h4>Keadilan (Al-'Adl)</h4>
+                                    <p>Menjaga keseimbangan hak antara penjual dan pembeli.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">🤲</div>
+                                <div class="text">
+                                    <h4>Kejujuran (Ash-Shidq)</h4>
+                                    <p>Transparansi dan keterbukaan dalam setiap transaksi.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">🛡️</div>
+                                <div class="text">
+                                    <h4>Amanah (Al-Amanah)</h4>
+                                    <p>Menjaga kepercayaan yang diberikan oleh mitra bisnis.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">🌍</div>
+                                <div class="text">
+                                    <h4>Kebermanfaatan (Al-Manfa'ah)</h4>
+                                    <p>Bisnis harus membawa manfaat bagi masyarakat luas.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="hadits-card">
+                            <div class="hadits-label">✦ Hadits Tentang Kejujuran</div>
+                            <div class="hadits-arab">
+                                إِنَّ التُّجَّارَ يُبْعَثُونَ يَوْمَ الْقِيَامَةِ فُجَّارًا إِلَّا مَنِ اتَّقَى اللهَ وَبَرَّ وَصَدَقَ
+                            </div>
+                            <div class="hadits-transliterasi">
+                                "Innat-tujjāra yub'atsūna yaumal-qiyāmati fujjāran illā manit-taqallāha wa barra wa shadaqa."
+                            </div>
+                            <div class="hadits-terjemahan">
+                                "Sesungguhnya para pedagang akan dibangkitkan pada hari kiamat sebagai orang-orang yang 
+                                durhaka, kecuali yang bertakwa kepada Allah, berbuat baik, dan jujur."
+                            </div>
+                            <div class="hadits-sumber">HR. At-Tirmidzi, No. 1210</div>
+                        </div>
+                        <div class="infographic-card">
+                            <img src="images/hero-islamic-market.png" alt="Pasar Islami - Tempat Bermuamalah">
+                            <div class="info-content">
+                                <h4>Pasar dalam Islam</h4>
+                                <p>Rasulullah ﷺ menekankan pentingnya etika di pasar, sebagai tempat utama bertemunya penjual dan pembeli.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Muamalah -->
+            <div class="tab-content" id="tab-muamalah">
+                <div class="detail-row reverse animate-on-scroll">
+                    <div class="detail-text">
+                        <h3>Fiqh Muamalah dalam Bisnis</h3>
+                        <p>
+                            Muamalah adalah cabang ilmu fiqih yang membahas tentang hubungan antar manusia 
+                            dalam bidang ekonomi dan sosial. Dalam konteks bisnis, muamalah mengatur 
+                            segala bentuk transaksi seperti jual beli (al-bay'), sewa-menyewa (al-ijārah), 
+                            kerjasama (asy-syirkah), dan lainnya.
+                        </p>
+                        <p>
+                            Prinsip utama muamalah adalah bahwa segala bentuk transaksi pada dasarnya 
+                            diperbolehkan (mubah), kecuali ada dalil yang melarangnya. Hal ini memberikan 
+                            fleksibilitas bagi umat Islam untuk berinovasi dalam berbisnis selama tidak 
+                            melanggar ketentuan syariah.
+                        </p>
+                        <ul class="prinsip-list">
+                            <li>
+                                <div class="icon">🚫</div>
+                                <div class="text">
+                                    <h4>Larangan Riba</h4>
+                                    <p>Tidak mengambil keuntungan dari bunga atau riba dalam transaksi.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">⚠️</div>
+                                <div class="text">
+                                    <h4>Larangan Gharar</h4>
+                                    <p>Menghindari ketidakjelasan dan spekulasi berlebihan dalam akad.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">❌</div>
+                                <div class="text">
+                                    <h4>Larangan Maysir</h4>
+                                    <p>Tidak melakukan perjudian atau spekulasi dalam bisnis.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">✅</div>
+                                <div class="text">
+                                    <h4>Kerelaan (An-Tarādhin)</h4>
+                                    <p>Setiap transaksi harus didasari kerelaan kedua belah pihak.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="hadits-card">
+                            <div class="hadits-label">✦ Hadits Tentang Jual Beli</div>
+                            <div class="hadits-arab">
+                                إِنَّمَا الْبَيْعُ عَنْ تَرَاضٍ
+                            </div>
+                            <div class="hadits-transliterasi">
+                                "Innamal-bay'u 'an tarādhin."
+                            </div>
+                            <div class="hadits-terjemahan">
+                                "Sesungguhnya jual beli itu hanya sah jika atas dasar saling rela."
+                            </div>
+                            <div class="hadits-sumber">HR. Ibnu Majah, No. 2185</div>
+                        </div>
+                        <div class="hadits-card">
+                            <div class="hadits-label">✦ Hadits Larangan Riba</div>
+                            <div class="hadits-arab">
+                                لَعَنَ رَسُولُ اللهِ ﷺ آكِلَ الرِّبَا وَمُؤْكِلَهُ وَكَاتِبَهُ وَشَاهِدَيْهِ
+                            </div>
+                            <div class="hadits-transliterasi">
+                                "La'ana Rasūlullāhi ﷺ ākila ar-ribā wa mu'kilahu wa kātibahu wa syāhidayhi."
+                            </div>
+                            <div class="hadits-terjemahan">
+                                "Rasulullah ﷺ melaknat pemakan riba, pemberi riba, penulisnya, dan kedua saksinya."
+                            </div>
+                            <div class="hadits-sumber">HR. Muslim, No. 1598</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Akhlaq -->
+            <div class="tab-content" id="tab-akhlaq">
+                <div class="detail-row animate-on-scroll">
+                    <div class="detail-text">
+                        <h3>Akhlaq Pebisnis Muslim</h3>
+                        <p>
+                            Akhlaq (budi pekerti) merupakan fondasi terpenting dalam etika bisnis Islam. 
+                            Rasulullah ﷺ sendiri diutus untuk menyempurnakan akhlaq manusia, dan beliau 
+                            memberikan teladan terbaik sebagai pedagang yang jujur dan terpercaya.
+                        </p>
+                        <p>
+                            Seorang pebisnis Muslim harus menghiasi dirinya dengan sifat-sifat terpuji 
+                            seperti jujur (shidq), amanah, sabar, dermawan, dan memiliki rasa takut 
+                            kepada Allah dalam setiap transaksinya. Akhlaq yang baik bukan hanya 
+                            mendatangkan keberkahan, tetapi juga membangun kepercayaan pelanggan.
+                        </p>
+                        <ul class="prinsip-list">
+                            <li>
+                                <div class="icon">💡</div>
+                                <div class="text">
+                                    <h4>Shidq (Jujur)</h4>
+                                    <p>Tidak menyembunyikan cacat barang dan transparan dalam kualitas.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">🕊️</div>
+                                <div class="text">
+                                    <h4>Samahah (Toleran)</h4>
+                                    <p>Mudah dan murah hati dalam bertransaksi, tidak mempersulit.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">📝</div>
+                                <div class="text">
+                                    <h4>Wafa' (Menepati Janji)</h4>
+                                    <p>Menghormati perjanjian dan komitmen yang telah disepakati.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">🤗</div>
+                                <div class="text">
+                                    <h4>Ihsan (Berbuat Baik)</h4>
+                                    <p>Memberikan pelayanan terbaik melebihi ekspektasi pelanggan.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="hadits-card">
+                            <div class="hadits-label">✦ Hadits Tentang Akhlaq</div>
+                            <div class="hadits-arab">
+                                رَحِمَ اللهُ رَجُلًا سَمْحًا إِذَا بَاعَ وَإِذَا اشْتَرَى وَإِذَا اقْتَضَى
+                            </div>
+                            <div class="hadits-transliterasi">
+                                "Rahimallāhu rajulan samhan idzā bā'a wa idzasy-tarā wa idzaq-tadhā."
+                            </div>
+                            <div class="hadits-terjemahan">
+                                "Allah merahmati seseorang yang bersikap toleran (mudah) ketika menjual, 
+                                ketika membeli, dan ketika menagih haknya."
+                            </div>
+                            <div class="hadits-sumber">HR. Al-Bukhari, No. 2076</div>
+                        </div>
+                        <div class="infographic-card">
+                            <img src="images/business-handshake.png" alt="Kemitraan Bisnis Islami">
+                            <div class="info-content">
+                                <h4>Kemitraan Berbasis Akhlaq</h4>
+                                <p>Akhlaq mulia menjadi modal sosial terkuat dalam membangun kemitraan bisnis yang berkelanjutan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Akhlaq -->
+                <div class="quiz-card animate-on-scroll" id="quiz-akhlaq">
+                    <h4>🧠 Kuis — Akhlaq Bisnis</h4>
+                    <p class="quiz-question">
+                        Sifat seorang pedagang yang disebut Rasulullah ﷺ akan mendapat rahmat Allah 
+                        adalah…
+                    </p>
+                    <div class="quiz-options" data-correct="1">
+                        <div class="quiz-option" data-index="0" onclick="selectQuiz(this)">
+                            <div class="radio"></div>
+                            <span>Pandai menawar hingga mendapat harga termurah</span>
+                        </div>
+                        <div class="quiz-option" data-index="1" onclick="selectQuiz(this)">
+                            <div class="radio"></div>
+                            <span>Bersikap samhah (toleran/mudah) saat menjual, membeli, dan menagih</span>
+                        </div>
+                        <div class="quiz-option" data-index="2" onclick="selectQuiz(this)">
+                            <div class="radio"></div>
+                            <span>Selalu menaikkan harga demi keuntungan maksimal</span>
+                        </div>
+                        <div class="quiz-option" data-index="3" onclick="selectQuiz(this)">
+                            <div class="radio"></div>
+                            <span>Memonopoli pasar agar tidak ada pesaing</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="checkQuiz('quiz-akhlaq')">Periksa Jawaban</button>
+                    <div class="quiz-feedback correct-fb" id="quiz-akhlaq-correct">
+                        ✅ Benar! Rasulullah ﷺ bersabda bahwa Allah merahmati orang yang bersikap samhah (toleran/mudah) 
+                        saat berjual beli dan menagih hak. (HR. Al-Bukhari)
+                    </div>
+                    <div class="quiz-feedback wrong-fb" id="quiz-akhlaq-wrong">
+                        ❌ Kurang tepat. Jawaban yang benar adalah: bersikap samhah (toleran/mudah) saat menjual, 
+                        membeli, dan menagih. Ini berdasarkan HR. Al-Bukhari No. 2076.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Zakat -->
+            <div class="tab-content" id="tab-zakat">
+                <div class="detail-row reverse animate-on-scroll">
+                    <div class="detail-text">
+                        <h3>Zakat dalam Bisnis Islam</h3>
+                        <p>
+                            Zakat merupakan rukun Islam ketiga yang memiliki dimensi sosial-ekonomi yang sangat 
+                            kuat. Dalam konteks bisnis, zakat perdagangan (zakāt at-tijārah) wajib dikeluarkan 
+                            oleh setiap pedagang Muslim yang hartanya telah mencapai nisab dan haul.
+                        </p>
+                        <p>
+                            Zakat bukan sekadar mengurangi harta, tetapi justru menjadi instrumen pembersihan 
+                            dan keberkahan rezeki. Allah SWT menjanjikan bahwa harta yang dizakati akan tumbuh 
+                            dan berkembang, bukan berkurang.
+                        </p>
+                        <ul class="prinsip-list">
+                            <li>
+                                <div class="icon">📊</div>
+                                <div class="text">
+                                    <h4>Nisab Zakat Perdagangan</h4>
+                                    <p>Setara dengan 85 gram emas, dihitung dari aset + piutang - utang.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">📅</div>
+                                <div class="text">
+                                    <h4>Haul (Masa Kepemilikan)</h4>
+                                    <p>Wajib dizakati setelah dimiliki selama satu tahun hijriyah.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">💰</div>
+                                <div class="text">
+                                    <h4>Kadar Zakat: 2,5%</h4>
+                                    <p>Dikeluarkan 2,5% dari total aset perdagangan yang telah memenuhi nisab.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">👥</div>
+                                <div class="text">
+                                    <h4>8 Asnaf Penerima</h4>
+                                    <p>Disalurkan kepada golongan yang berhak sesuai QS. At-Taubah: 60.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="hadits-card">
+                            <div class="hadits-label">✦ Hadits Tentang Zakat</div>
+                            <div class="hadits-arab">
+                                مَا نَقَصَتْ صَدَقَةٌ مِنْ مَالٍ
+                            </div>
+                            <div class="hadits-transliterasi">
+                                "Mā naqashat shadaqatun min māl."
+                            </div>
+                            <div class="hadits-terjemahan">
+                                "Sedekah (zakat) itu tidak mengurangi harta."
+                            </div>
+                            <div class="hadits-sumber">HR. Muslim, No. 2588</div>
+                        </div>
+                        <div class="hadits-card">
+                            <div class="hadits-label">✦ Hadits Harta Berkah</div>
+                            <div class="hadits-arab">
+                                أَدُّوا زَكَاةَ أَمْوَالِكُمْ
+                            </div>
+                            <div class="hadits-transliterasi">
+                                "Addū zakāta amwālikum."
+                            </div>
+                            <div class="hadits-terjemahan">
+                                "Tunaikanlah zakat harta-harta kalian."
+                            </div>
+                            <div class="hadits-sumber">HR. At-Tirmidzi, No. 616</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Zakat -->
+                <div class="quiz-card animate-on-scroll" id="quiz-zakat">
+                    <h4>🧠 Kuis — Zakat Perdagangan</h4>
+                    <p class="quiz-question">
+                        Berapakah kadar zakat yang wajib dikeluarkan dari harta perdagangan yang telah mencapai nisab?
+                    </p>
+                    <div class="quiz-options" data-correct="2">
+                        <div class="quiz-option" data-index="0" onclick="selectQuiz(this)">
+                            <div class="radio"></div>
+                            <span>1%</span>
+                        </div>
+                        <div class="quiz-option" data-index="1" onclick="selectQuiz(this)">
+                            <div class="radio"></div>
+                            <span>2%</span>
+                        </div>
+                        <div class="quiz-option" data-index="2" onclick="selectQuiz(this)">
+                            <div class="radio"></div>
+                            <span>2,5%</span>
+                        </div>
+                        <div class="quiz-option" data-index="3" onclick="selectQuiz(this)">
+                            <div class="radio"></div>
+                            <span>5%</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="checkQuiz('quiz-zakat')">Periksa Jawaban</button>
+                    <div class="quiz-feedback correct-fb" id="quiz-zakat-correct">
+                        ✅ Benar! Kadar zakat perdagangan adalah 2,5% dari total aset yang telah mencapai nisab 
+                        (setara 85 gram emas) dan dimiliki selama satu tahun.
+                    </div>
+                    <div class="quiz-feedback wrong-fb" id="quiz-zakat-wrong">
+                        ❌ Kurang tepat. Jawaban yang benar adalah 2,5%. Ini merupakan kadar standar zakat mal 
+                        (harta) termasuk perdagangan, berdasarkan ijma' ulama.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============ LAYER 5: STUDI KASUS (atas-bawah) ============ -->
+    <section class="studikasus-section" id="studikasus">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-badge">📋 Studi Kasus</div>
+                <h2 class="section-title">
+                    Implementasi <span class="gradient-text">Nyata</span>
+                </h2>
+                <p class="section-subtitle">
+                    Contoh penerapan etika bisnis syariah dalam berbagai sektor ekonomi modern.
+                </p>
+            </div>
+
+            <div class="studikasus-timeline">
+                <!-- Kasus 1: Perdagangan Halal -->
+                <div class="studikasus-item animate-on-scroll">
+                    <div class="studikasus-marker">🏪</div>
+                    <div class="studikasus-content">
+                        <img src="images/hero-islamic-market.png" alt="Perdagangan Halal" class="studikasus-img">
+                        <div class="studikasus-body">
+                            <span class="case-badge halal">Perdagangan Halal</span>
+                            <h3>Perdagangan Halal di Era Modern</h3>
+                            <p>
+                                Industri halal global diproyeksikan mencapai US$ 5 triliun pada 2030. 
+                                Perdagangan halal tidak hanya mencakup produk makanan, tetapi juga kosmetik, 
+                                farmasi, fashion, dan pariwisata. Sertifikasi halal menjadi standar kepercayaan 
+                                konsumen Muslim di seluruh dunia.
+                            </p>
+                            <ul class="key-points">
+                                <li>Sertifikasi halal menjamin kehalalan produk dari hulu ke hilir</li>
+                                <li>Transparansi bahan baku dan proses produksi</li>
+                                <li>Larangan menggunakan bahan haram dan najis</li>
+                                <li>Penerapan standar kebersihan dan kesehatan (thayyib)</li>
+                            </ul>
+                            <div class="case-hadits">
+                                <div class="hadits-arab" style="font-size: 1.1rem;">
+                                    يَا أَيُّهَا الرُّسُلُ كُلُوا مِنَ الطَّيِّبَاتِ وَاعْمَلُوا صَالِحًا
+                                </div>
+                                <div class="hadits-transliterasi">
+                                    "Yā ayyuhar-rusulu kulū minat-thayyibāti wa'malū shālihā."
+                                </div>
+                                <div class="hadits-terjemahan">
+                                    "Wahai para Rasul! Makanlah dari (makanan) yang baik-baik dan kerjakanlah kebajikan."
+                                </div>
+                                <div class="hadits-sumber">QS. Al-Mu'minun: 51</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kasus 2: Perbankan Syariah -->
+                <div class="studikasus-item animate-on-scroll">
+                    <div class="studikasus-marker">🏦</div>
+                    <div class="studikasus-content">
+                        <img src="images/islamic-finance-building.png" alt="Perbankan Syariah" class="studikasus-img">
+                        <div class="studikasus-body">
+                            <span class="case-badge syariah">Perbankan Syariah</span>
+                            <h3>Perbankan Syariah: Sistem Keuangan Tanpa Riba</h3>
+                            <p>
+                                Perbankan syariah beroperasi berdasarkan prinsip bagi hasil (mudhārabah), 
+                                jual beli (murābahah), dan sewa (ijārah) — bukan bunga (riba). 
+                                Sistem ini menjamin keadilan distribusi keuntungan dan risiko antara 
+                                bank dan nasabah.
+                            </p>
+                            <ul class="key-points">
+                                <li>Akad mudhārabah: bagi hasil antara pemodal dan pengelola</li>
+                                <li>Akad murābahah: jual beli dengan margin yang disepakati</li>
+                                <li>Akad ijārah: sewa-menyewa aset dengan pembayaran berkala</li>
+                                <li>Dewan Pengawas Syariah memastikan kepatuhan produk</li>
+                            </ul>
+                            <div class="case-hadits">
+                                <div class="hadits-arab" style="font-size: 1.1rem;">
+                                    وَأَحَلَّ اللهُ الْبَيْعَ وَحَرَّمَ الرِّبَا
+                                </div>
+                                <div class="hadits-transliterasi">
+                                    "Wa ahallallāhul-bay'a wa harramar-ribā."
+                                </div>
+                                <div class="hadits-terjemahan">
+                                    "Dan Allah telah menghalalkan jual beli dan mengharamkan riba."
+                                </div>
+                                <div class="hadits-sumber">QS. Al-Baqarah: 275</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kasus 3: Kemitraan Bisnis -->
+                <div class="studikasus-item animate-on-scroll">
+                    <div class="studikasus-marker">🤝</div>
+                    <div class="studikasus-content">
+                        <img src="images/business-handshake.png" alt="Kemitraan Bisnis Islam" class="studikasus-img">
+                        <div class="studikasus-body">
+                            <span class="case-badge kemitraan">Kemitraan Bisnis</span>
+                            <h3>Kemitraan Bisnis Islami (Asy-Syirkah)</h3>
+                            <p>
+                                Syirkah (kemitraan/persekutuan) adalah bentuk kerjasama bisnis yang dianjurkan 
+                                dalam Islam. Nabi Muhammad ﷺ sendiri pernah bermitra dagang sebelum kenabian. 
+                                Kemitraan berbasis syariah menekankan kejelasan akad, pembagian keuntungan 
+                                yang adil, dan tanggung jawab bersama.
+                            </p>
+                            <ul class="key-points">
+                                <li>Syirkah 'inan: kerjasama modal dan kerja bersama</li>
+                                <li>Syirkah mudhārabah: satu pihak modal, pihak lain pengelola</li>
+                                <li>Pembagian keuntungan sesuai kesepakatan, kerugian sesuai modal</li>
+                                <li>Transparansi laporan keuangan dan audit berkala</li>
+                            </ul>
+                            <div class="case-hadits">
+                                <div class="hadits-arab" style="font-size: 1.1rem;">
+                                    أَنَا ثَالِثُ الشَّرِيكَيْنِ مَا لَمْ يَخُنْ أَحَدُهُمَا صَاحِبَهُ
+                                </div>
+                                <div class="hadits-transliterasi">
+                                    "Ana tsālitsus-syarīkaini mā lam yakhun ahaduhumā shāhibahu."
+                                </div>
+                                <div class="hadits-terjemahan">
+                                    "Aku (Allah) adalah pihak ketiga dari dua orang yang berserikat, selama 
+                                    salah satu dari keduanya tidak mengkhianati yang lain."
+                                </div>
+                                <div class="hadits-sumber">HR. Abu Dawud, No. 3383</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============ LAYER 6: REFERENSI (kiri-kanan) ============ -->
+    <section class="referensi-section" id="referensi">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-badge">📚 Referensi</div>
+                <h2 class="section-title">
+                    Dalil & <span class="gradient-text">Sumber Rujukan</span>
+                </h2>
+                <p class="section-subtitle">
+                    Kumpulan dalil Al-Qur'an, Hadits, dan sumber referensi pendukung modul pembelajaran.
+                </p>
+            </div>
+
+            <div class="referensi-grid">
+                <!-- Dalil Al-Qur'an & Hadits -->
+                <div class="referensi-card animate-on-scroll">
+                    <h3>📖 Dalil Al-Qur'an & Hadits</h3>
+                    <div class="dalil-list">
+                        <div class="dalil-item">
+                            <div class="dalil-ref">QS. An-Nisa: 29</div>
+                            <div class="dalil-arab">
+                                يَا أَيُّهَا الَّذِينَ آمَنُوا لَا تَأْكُلُوا أَمْوَالَكُمْ بَيْنَكُمْ بِالْبَاطِلِ إِلَّا أَنْ تَكُونَ تِجَارَةً عَنْ تَرَاضٍ مِنْكُمْ
+                            </div>
+                            <div class="dalil-transliterasi">
+                                "Yā ayyuhalladzīna āmanū lā ta'kulū amwālakum bainakum bil-bāthili illā an takūna tijāratan 'an tarādhin minkum."
+                            </div>
+                            <div class="dalil-terjemahan">
+                                "Wahai orang-orang yang beriman! Janganlah kamu saling memakan harta sesamamu dengan jalan yang batil (tidak benar), kecuali dalam perdagangan yang berlaku atas dasar suka sama suka di antara kamu."
+                            </div>
+                        </div>
+                        <div class="dalil-item">
+                            <div class="dalil-ref">QS. Al-Baqarah: 282</div>
+                            <div class="dalil-arab">
+                                يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا تَدَايَنْتُمْ بِدَيْنٍ إِلَى أَجَلٍ مُسَمًّى فَاكْتُبُوهُ
+                            </div>
+                            <div class="dalil-transliterasi">
+                                "Yā ayyuhalladzīna āmanū idzā tadāyantum bidaynin ilā ajalin musamman faktubūhu."
+                            </div>
+                            <div class="dalil-terjemahan">
+                                "Wahai orang-orang yang beriman! Apabila kamu melakukan utang piutang untuk waktu yang ditentukan, hendaklah kamu menuliskannya."
+                            </div>
+                        </div>
+                        <div class="dalil-item">
+                            <div class="dalil-ref">QS. Al-Muthaffifin: 1-3</div>
+                            <div class="dalil-arab">
+                                وَيْلٌ لِلْمُطَفِّفِينَ الَّذِينَ إِذَا اكْتَالُوا عَلَى النَّاسِ يَسْتَوْفُونَ وَإِذَا كَالُوهُمْ أَوْ وَزَنُوهُمْ يُخْسِرُونَ
+                            </div>
+                            <div class="dalil-transliterasi">
+                                "Wailul lil-muthaffifīn. Alladzīna idzak-tālū 'alan-nāsi yastawfūn. Wa idzā kālūhum aw wazanūhum yukhsirūn."
+                            </div>
+                            <div class="dalil-terjemahan">
+                                "Celakalah bagi orang-orang yang curang (dalam menakar dan menimbang). Yaitu orang-orang yang apabila menerima takaran dari orang lain mereka minta dicukupkan, dan apabila mereka menakar atau menimbang (untuk orang lain), mereka mengurangi."
+                            </div>
+                        </div>
+                        <div class="dalil-item">
+                            <div class="dalil-ref">Hadits — HR. Ahmad</div>
+                            <div class="dalil-arab">
+                                مَنْ غَشَّنَا فَلَيْسَ مِنَّا
+                            </div>
+                            <div class="dalil-transliterasi">
+                                "Man ghasysyanā fa laysa minnā."
+                            </div>
+                            <div class="dalil-terjemahan">
+                                "Barangsiapa yang menipu kami, maka bukan dari golongan kami."
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unduh PDF & Glosarium -->
+                <div style="display: flex; flex-direction: column; gap: 32px;">
+                    <div class="referensi-card animate-on-scroll">
+                        <h3>📥 Unduh Materi (PDF)</h3>
+                        <div class="download-list">
+                            <div class="download-item">
+                                <div class="download-info">
+                                    <div class="download-icon">📕</div>
+                                    <div>
+                                        <h4>Modul 1 — Pengantar Etika Bisnis Syariah</h4>
+                                        <span>PDF • 2.3 MB</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="download-btn" onclick="event.preventDefault(); alert('Fitur unduh PDF akan tersedia setelah deployment.')">Unduh</a>
+                            </div>
+                            <div class="download-item">
+                                <div class="download-info">
+                                    <div class="download-icon">📗</div>
+                                    <div>
+                                        <h4>Modul 2 — Fiqh Muamalah</h4>
+                                        <span>PDF • 3.1 MB</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="download-btn" onclick="event.preventDefault(); alert('Fitur unduh PDF akan tersedia setelah deployment.')">Unduh</a>
+                            </div>
+                            <div class="download-item">
+                                <div class="download-info">
+                                    <div class="download-icon">📘</div>
+                                    <div>
+                                        <h4>Modul 3 — Akhlaq Pebisnis Muslim</h4>
+                                        <span>PDF • 2.8 MB</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="download-btn" onclick="event.preventDefault(); alert('Fitur unduh PDF akan tersedia setelah deployment.')">Unduh</a>
+                            </div>
+                            <div class="download-item">
+                                <div class="download-info">
+                                    <div class="download-icon">📙</div>
+                                    <div>
+                                        <h4>Modul 4 — Zakat Perdagangan</h4>
+                                        <span>PDF • 1.9 MB</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="download-btn" onclick="event.preventDefault(); alert('Fitur unduh PDF akan tersedia setelah deployment.')">Unduh</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="referensi-card animate-on-scroll">
+                        <h3>📝 Glosarium Istilah</h3>
+                        <div class="glosarium-list">
+                            <dl class="glosarium-item">
+                                <dt>Muamalah <span class="arabic-term">مُعَامَلَة</span></dt>
+                                <dd>Hubungan atau interaksi antar manusia dalam bidang ekonomi dan sosial sesuai syariah.</dd>
+                            </dl>
+                            <dl class="glosarium-item">
+                                <dt>Riba <span class="arabic-term">رِبَا</span></dt>
+                                <dd>Tambahan (bunga) atas pinjaman atau transaksi yang diharamkan dalam Islam.</dd>
+                            </dl>
+                            <dl class="glosarium-item">
+                                <dt>Gharar <span class="arabic-term">غَرَر</span></dt>
+                                <dd>Ketidakjelasan atau ketidakpastian dalam objek dan syarat transaksi bisnis.</dd>
+                            </dl>
+                            <dl class="glosarium-item">
+                                <dt>Maysir <span class="arabic-term">مَيْسِر</span></dt>
+                                <dd>Perjudian atau spekulasi berlebihan yang dilarang dalam transaksi bisnis.</dd>
+                            </dl>
+                            <dl class="glosarium-item">
+                                <dt>Mudhārabah <span class="arabic-term">مُضَارَبَة</span></dt>
+                                <dd>Kerjasama bisnis di mana satu pihak menyediakan modal dan pihak lain mengelola.</dd>
+                            </dl>
+                            <dl class="glosarium-item">
+                                <dt>Murābahah <span class="arabic-term">مُرَابَحَة</span></dt>
+                                <dd>Jual beli di mana penjual menyebutkan harga pokok dan margin keuntungan yang disepakati.</dd>
+                            </dl>
+                            <dl class="glosarium-item">
+                                <dt>Syirkah <span class="arabic-term">شِرْكَة</span></dt>
+                                <dd>Persekutuan atau kemitraan bisnis antara dua pihak atau lebih dalam hal modal dan/atau kerja.</dd>
+                            </dl>
+                            <dl class="glosarium-item">
+                                <dt>Nisab <span class="arabic-term">نِصَاب</span></dt>
+                                <dd>Batas minimum harta yang wajib dizakati, setara 85 gram emas untuk zakat perdagangan.</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ============ TENTANG ============ -->
+    <section style="padding: 100px 0;" id="tentang">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-badge">ℹ️ Tentang</div>
+                <h2 class="section-title">
+                    Tentang <span class="gradient-text">Modul Ini</span>
+                </h2>
+            </div>
+            <div class="detail-row animate-on-scroll" style="align-items: center;">
+                <div class="detail-text">
+                    <h3>Proyek Akhir UAS</h3>
+                    <p>
+                        Modul Pembelajaran Etika Bisnis Syariah ini disusun sebagai proyek akhir 
+                        Ujian Akhir Semester (UAS) mata kuliah Pendidikan Agama Islam. 
+                        Modul ini bertujuan untuk memberikan pemahaman komprehensif tentang 
+                        prinsip-prinsip etika dalam berbisnis menurut perspektif Islam.
+                    </p>
+                    <p>
+                        Materi disajikan secara interaktif dengan dilengkapi dalil-dalil dari 
+                        Al-Qur'an dan Hadits, studi kasus kontemporer, serta kuis evaluasi 
+                        untuk mengukur pemahaman pembaca.
+                    </p>
+                    <ul class="prinsip-list">
+                        <li>
+                            <div class="icon">👩‍🎓</div>
+                            <div class="text">
+                                <h4>Fatimah Az-Zahra</h4>
+                                <p>NIM: K3525006 — Penyusun modul</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon">🏫</div>
+                            <div class="text">
+                                <h4>Universitas Sebelas Maret</h4>
+                                <p>Program Studi Pendidikan — Surakarta</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon">📅</div>
+                            <div class="text">
+                                <h4>Tahun Akademik 2025/2026</h4>
+                                <p>Semester Genap — Proyek Akhir UAS PAI</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:24px;">
+                    <div class="hadits-card">
+                        <div class="hadits-label">✦ Motivasi Menuntut Ilmu</div>
+                        <div class="hadits-arab">
+                            مَنْ سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ
+                        </div>
+                        <div class="hadits-transliterasi">
+                            "Man salaka tharīqan yaltamisu fīhi 'ilman sahhalallāhu lahu bihi tharīqan ilal-jannah."
+                        </div>
+                        <div class="hadits-terjemahan">
+                            "Barangsiapa menempuh jalan untuk menuntut ilmu, maka Allah akan mudahkan baginya jalan menuju surga."
+                        </div>
+                        <div class="hadits-sumber">HR. Muslim, No. 2699</div>
+                    </div>
+                    <div class="infographic-card">
+                        <img src="images/islamic-finance-building.png" alt="Bangunan Keuangan Islami">
+                        <div class="info-content">
+                            <h4>Visi Ekonomi Syariah</h4>
+                            <p>Membangun ekosistem bisnis yang berlandaskan keadilan, keberkahan, dan kemaslahatan umat.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ LAYER 7: FOOTER ============ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">ب</div>
+                        <div class="footer-logo-text">Etika Bisnis Syariah</div>
+                    </div>
+                    <p>
+                        Modul pembelajaran interaktif tentang etika bisnis dalam perspektif Islam. 
+                        Berlandaskan Al-Qur'an dan Sunnah untuk membentuk pelaku bisnis yang 
+                        berintegritas dan bertakwa.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Instagram" title="Instagram">📷</a>
+                        <a href="#" class="social-link" aria-label="YouTube" title="YouTube">▶️</a>
+                        <a href="#" class="social-link" aria-label="LinkedIn" title="LinkedIn">💼</a>
+                        <a href="https://github.com/fatimahzahrara" class="social-link" aria-label="GitHub" title="GitHub">💻</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigasi</h4>
+                    <ul>
+                        <li><a href="#beranda">Beranda</a></li>
+                        <li><a href="#modul">Modul</a></li>
+                        <li><a href="#prinsip">Prinsip & Materi</a></li>
+                        <li><a href="#studikasus">Studi Kasus</a></li>
+                        <li><a href="#referensi">Referensi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Modul</h4>
+                    <ul>
+                        <li><a href="#prinsip" onclick="setTimeout(()=>switchTab('pengantar'),300)">Pengantar</a></li>
+                        <li><a href="#prinsip" onclick="setTimeout(()=>switchTab('muamalah'),300)">Muamalah</a></li>
+                        <li><a href="#prinsip" onclick="setTimeout(()=>switchTab('akhlaq'),300)">Akhlaq</a></li>
+                        <li><a href="#prinsip" onclick="setTimeout(()=>switchTab('zakat'),300)">Zakat</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontak</h4>
+                    <div class="footer-contact-item">
+                        <span class="fc-icon">👩‍🎓</span>
+                        <span>Fatimah Az-Zahra<br>NIM: K3525006</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <span class="fc-icon">🏫</span>
+                        <span>Universitas Sebelas Maret<br>Surakarta, Jawa Tengah</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <span class="fc-icon">✉️</span>
+                        <span>fatimahzahrara@student.uns.ac.id</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Modul Etika Bisnis Syariah — Fatimah Az-Zahra (K3525006)</p>
+                <p>Proyek Akhir UAS • <a href="#tentang">Pendidikan Agama Islam</a> • UNS</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Kembali ke atas">
+        ↑
+    </button>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        // ===== Navbar Scroll Effect =====
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            if (window.scrollY > 500) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // ===== Mobile Menu =====
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // ===== Active Nav Link Highlight =====
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ===== Tab Navigation =====
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-tab') === tabName) {
+                    btn.classList.add('active');
+                }
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            const target = document.getElementById('tab-' + tabName);
+            if (target) {
+                target.classList.add('active');
+            }
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchTab(btn.getAttribute('data-tab'));
+            });
+        });
+
+        function scrollToTab(tabName) {
+            switchTab(tabName);
+            document.getElementById('prinsip').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ===== Quiz Logic =====
+        function selectQuiz(option) {
+            const parent = option.closest('.quiz-options');
+            parent.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            option.classList.add('selected');
+        }
+
+        function checkQuiz(quizId) {
+            const quizCard = document.getElementById(quizId);
+            const optionsContainer = quizCard.querySelector('.quiz-options');
+            const correctIndex = parseInt(optionsContainer.getAttribute('data-correct'));
+            const selected = optionsContainer.querySelector('.quiz-option.selected');
+
+            if (!selected) {
+                alert('Silakan pilih jawaban terlebih dahulu.');
+                return;
+            }
+
+            const selectedIndex = parseInt(selected.getAttribute('data-index'));
+
+            // Reset styles
+            optionsContainer.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.remove('correct', 'wrong');
+            });
+
+            // Hide all feedbacks
+            quizCard.querySelectorAll('.quiz-feedback').forEach(fb => fb.classList.remove('show'));
+
+            if (selectedIndex === correctIndex) {
+                selected.classList.add('correct');
+                document.getElementById(quizId + '-correct').classList.add('show');
+            } else {
+                selected.classList.add('wrong');
+                optionsContainer.querySelectorAll('.quiz-option')[correctIndex].classList.add('correct');
+                document.getElementById(quizId + '-wrong').classList.add('show');
+            }
+        }
+
+        // ===== Scroll Animations (Intersection Observer) =====
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
