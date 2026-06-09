@@ -68,22 +68,96 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     });
 });
 
-// ===== Active Nav Link Highlight =====
-const sections = document.querySelectorAll('section[id]');
-window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 120;
-        if (window.scrollY >= sectionTop) {
-            current = section.getAttribute('id');
-        }
-    });
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
+// ===== Main Section Tab Routing Logic =====
+const mainTabIds = ['beranda', 'modul', 'prinsip', 'studikasus', 'referensi', 'forum', 'tentang'];
+
+function switchMainTab(targetId) {
+    if (!mainTabIds.includes(targetId)) return;
+
+    // Update nav links active class
+    document.querySelectorAll('.nav-links a, .navbar-brand').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === '#' + targetId) {
             link.classList.add('active');
+        } else {
+            link.classList.remove('active');
         }
     });
+
+    // Hide/show sections using CSS class
+    mainTabIds.forEach(id => {
+        const section = document.getElementById(id);
+        if (section) {
+            if (id === targetId) {
+                section.classList.remove('main-tab-hidden');
+                // Trigger animation and visibility for child elements
+                section.querySelectorAll('.animate-on-scroll').forEach(el => {
+                    el.classList.add('visible');
+                });
+            } else {
+                section.classList.add('main-tab-hidden');
+            }
+        }
+    });
+
+    // Special case: stats-bar goes with beranda
+    const statsBar = document.querySelector('.stats-bar');
+    if (statsBar) {
+        if (targetId === 'beranda') {
+            statsBar.classList.remove('main-tab-hidden');
+            statsBar.querySelectorAll('.animate-on-scroll').forEach(el => {
+                el.classList.add('visible');
+            });
+        } else {
+            statsBar.classList.add('main-tab-hidden');
+        }
+    }
+
+    // Scroll back to top smoothly/instantly so new tab starts at the top
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // Update URL hash without causing a page jump
+    if (window.location.hash !== '#' + targetId) {
+        history.pushState(null, null, '#' + targetId);
+    }
+}
+
+// Intercept all anchor link clicks that target main tabs
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="#"]');
+    if (link) {
+        const targetId = link.getAttribute('href').substring(1);
+        if (mainTabIds.includes(targetId)) {
+            e.preventDefault();
+            switchMainTab(targetId);
+            
+            // Close mobile menu if open
+            if (hamburger && navLinks) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+            }
+        }
+    }
+});
+
+// Handle initial load and browser back/forward buttons
+window.addEventListener('hashchange', () => {
+    const hash = window.location.hash.substring(1);
+    if (hash && mainTabIds.includes(hash)) {
+        switchMainTab(hash);
+    } else {
+        switchMainTab('beranda');
+    }
+});
+
+// Run once on load
+document.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash.substring(1);
+    if (hash && mainTabIds.includes(hash)) {
+        switchMainTab(hash);
+    } else {
+        switchMainTab('beranda');
+    }
 });
 
 // ===== Tab Navigation =====
@@ -110,8 +184,8 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 });
 
 function scrollToTab(tabName) {
+    switchMainTab('prinsip');
     switchTab(tabName);
-    document.getElementById('prinsip').scrollIntoView({ behavior: 'smooth' });
 }
 
 // ===== Interactive Quiz Logic (Multi-Question) =====
@@ -501,6 +575,40 @@ function checkAllQuestions(quizId) {
             forumList.innerHTML = html;
         }
 
+        // Theme Switcher Functions
+        window.toggleTheme = function() {
+            const body = document.body;
+            const themeBtn = document.getElementById('themeToggle');
+            if (body.classList.contains('light-theme')) {
+                body.classList.remove('light-theme');
+                themeBtn.innerHTML = '☀️ Mode Terang';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.add('light-theme');
+                themeBtn.innerHTML = '🌙 Mode Gelap';
+                localStorage.setItem('theme', 'light');
+            }
+        };
+
+        // Initialize Theme from localStorage
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        const themeBtn = document.getElementById('themeToggle');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+            if (themeBtn) themeBtn.innerHTML = '🌙 Mode Gelap';
+        } else {
+            document.body.classList.remove('light-theme');
+            if (themeBtn) themeBtn.innerHTML = '☀️ Mode Terang';
+        }
+
         // Initialize features on script load
         updateProgressBar();
         renderForumQuestions();
+
+        // Initialize active main tab based on URL hash immediately
+        const initialHash = window.location.hash.substring(1);
+        if (initialHash && mainTabIds.includes(initialHash)) {
+            switchMainTab(initialHash);
+        } else {
+            switchMainTab('beranda');
+        }

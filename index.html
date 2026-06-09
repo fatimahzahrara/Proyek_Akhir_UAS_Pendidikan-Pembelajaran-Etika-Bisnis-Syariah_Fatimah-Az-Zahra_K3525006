@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="light-theme">
 
     <!-- Background Decorative Glow Blobs -->
     <div class="glow-blob blob-1"></div>
@@ -38,6 +38,9 @@
                 <li><a href="#forum">Diskusi</a></li>
                 <li><a href="#tentang">Tentang</a></li>
             </ul>
+            <button class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Ganti Tema">
+                🌙 Mode Gelap
+            </button>
             <button class="hamburger" id="hamburger" aria-label="Menu navigasi">
                 <span></span><span></span><span></span>
             </button>
@@ -45,7 +48,7 @@
     </nav>
 
     <!-- Hero / Beranda Section -->
-    <section class="hero" id="beranda">
+    <section class="hero main-tab-section" id="beranda">
         <div class="hero-bg">
             <img src="https://picsum.photos/id/20/1200/800" alt="Pasar Islami Modern">
         </div>
@@ -94,7 +97,7 @@
     </section>
 
     <!-- Statistics Bar Section -->
-    <section class="stats-bar">
+    <section class="stats-bar main-tab-section">
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item animate-on-scroll">
@@ -120,7 +123,7 @@
     <div class="section-divider"></div>
 
     <!-- Sub-modul Cards Grid -->
-    <section class="submodul-section" id="modul">
+    <section class="submodul-section main-tab-section" id="modul">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <div class="section-badge">📚 Sub-Modul</div>
@@ -163,7 +166,7 @@
     <div class="section-divider"></div>
 
     <!-- Detail Modul & Tabbed Content -->
-    <section class="detail-section" id="prinsip">
+    <section class="detail-section main-tab-section" id="prinsip">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <div class="section-badge">📜 Detail Materi</div>
@@ -239,6 +242,20 @@
                                 <div class="text">
                                     <h4>Kebermanfaatan (Al-Manfa'ah)</h4>
                                     <p>Aktivitas bisnis harus berorientasi pada kemaslahatan masyarakat luas.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">🕌</div>
+                                <div class="text">
+                                    <h4>Tauhid (Keesaan Allah)</h4>
+                                    <p>Menyadari bahwa Allah pemilik mutlak harta, dan manusia hanyalah pemegang amanah untuk kemaslahatan.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">🏹</div>
+                                <div class="text">
+                                    <h4>Kebebasan Berkehendak (Ikhtiyar)</h4>
+                                    <p>Kebebasan melakukan inovasi bisnis secara kreatif namun dibatasi oleh rambu-rambu syariat.</p>
                                 </div>
                             </li>
                         </ul>
@@ -398,6 +415,20 @@
                                     <p>Memastikan pertukaran harta terjadi atas dasar kerelaan kedua pihak.</p>
                                 </div>
                             </li>
+                            <li>
+                                <div class="icon">🕵️</div>
+                                <div class="text">
+                                    <h4>Larangan Tadlis (Penipuan)</h4>
+                                    <p>Melarang segala bentuk manipulasi kualitas, kuantitas, atau ketidaksesuaian informasi produk.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">📦</div>
+                                <div class="text">
+                                    <h4>Larangan Ikhtikar (Monopoli)</h4>
+                                    <p>Melarang penimbunan barang kebutuhan pokok masyarakat dengan tujuan menaikkan harga pasar secara tidak wajar.</p>
+                                </div>
+                            </li>
                         </ul>
 
                         <!-- Quiz Muamalah -->
@@ -554,6 +585,20 @@
                                     <p>Memberikan pelayanan ekstra yang tulus di luar sekadar transaksi jual beli kontraktual.</p>
                                 </div>
                             </li>
+                            <li>
+                                <div class="icon">👥</div>
+                                <div class="text">
+                                    <h4>Ukhuwah (Persaudaraan)</h4>
+                                    <p>Membangun iklim persaingan yang sehat, kolaboratif, dan tolong-menolong sesama pelaku usaha.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">🌳</div>
+                                <div class="text">
+                                    <h4>Kelestarian Lingkungan (Hifzh al-Bi'ah)</h4>
+                                    <p>Mencegah kerusakan alam (fasad) akibat eksploitasi berlebihan atau limbah operasional industri.</p>
+                                </div>
+                            </li>
                         </ul>
 
                         <!-- Quiz Akhlaq -->
@@ -705,6 +750,20 @@
                                 <div class="text">
                                     <h4>8 Asnaf Mustahik</h4>
                                     <p>Zakat disalurkan khusus kepada 8 golongan berhak yang tertulis dalam QS. At-Taubah: 60.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">💻</div>
+                                <div class="text">
+                                    <h4>Zakat Aset Digital & Portofolio</h4>
+                                    <p>Ketentuan zakat kontemporer pada saham syariah, reksa dana, portofolio investasi, serta kepemilikan mata uang kripto.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon">⚠️</div>
+                                <div class="text">
+                                    <h4>Sanksi Keengganan Zakat</h4>
+                                    <p>Dosa besar bagi yang menolak berzakat dan merugi secara berkah. Secara historis Khilafah memerangi penolak zakat.</p>
                                 </div>
                             </li>
                         </ul>
@@ -862,7 +921,7 @@
     <div class="section-divider"></div>
 
     <!-- Skenario Studi Kasus -->
-    <section class="studikasus-section" id="studikasus">
+    <section class="studikasus-section main-tab-section" id="studikasus">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <div class="section-badge">📋 Studi Kasus</div>
@@ -994,6 +1053,46 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Kasus 4: E-Commerce Dropship -->
+                <div class="studikasus-item animate-on-scroll">
+                    <div class="studikasus-marker">💻</div>
+                    <div class="studikasus-content">
+                        <img src="https://picsum.photos/id/119/800/600" alt="E-Commerce Dropship Syariah" class="studikasus-img">
+                        <div class="studikasus-body">
+                            <span class="case-badge syariah">E-Commerce Syariah</span>
+                            <h3>Studi Kasus 4: Keabsahan Jual Beli Online Skema Dropship</h3>
+                            
+                            <div class="case-detail-block">
+                                <h4>Latar Belakang Masalah:</h4>
+                                <p>Siti, seorang pemilik toko online di Instagram, menjual pakaian anak dengan metode dropship. Ia mengambil foto produk dari suplier besar di Jakarta, memajangnya di feed pribadinya, dan menaikkan harga jual. Ketika konsumen memesan dan mentransfer dana, Siti baru melakukan pembelian ke suplier utama agar barang langsung dikirim ke alamat konsumen dengan mengatasnamakan toko Siti. Konsumen mengira Siti adalah pemilik fisik barang dagangan tersebut.</p>
+                            </div>
+                            
+                            <div class="case-detail-block">
+                                <h4>Tinjauan Fiqih & Syariah:</h4>
+                                <p>Prinsip umum fiqih muamalah melarang menjual barang yang belum dimiliki secara sah (<em>taqabudh</em>/penguasaan fisik maupun hukum). Namun, e-commerce dropship diperbolehkan jika menggunakan salah satu dari dua skema syariah yang benar: 1) <strong>Akad Salam</strong>, di mana spesifikasi barang sangat jelas dan pembeli membayar lunas di muka, atau 2) <strong>Akad Wakalah bil Ujrah</strong>, di mana Siti bertindak sebagai agen resmi dari suplier utama dan berhak atas komisi penjualan.</p>
+                            </div>
+                            
+                            <div class="case-detail-block">
+                                <h4>Solusi & Rekomendasi:</h4>
+                                <p>Siti wajib menghubungi pihak suplier utama untuk membuat kesepakatan tertulis keagenan resmi (<em>akad wakalah/reseller</em>). Dengan kepemilikan akad ini, Siti bertindak sebagai wakil penjual yang sah, sehingga transaksi dropship-nya menjadi halal. Siti juga disarankan untuk secara transparan menginfokan kepada pembeli bahwa barang akan dikirim langsung dari gudang pusat kemitraannya.</p>
+                            </div>
+
+                            <div class="case-hadits">
+                                <div class="hadits-arab" style="font-size: 1.1rem;">
+                                    لاَ تَبِعْ مَا لَيْسَ عِنْدَكَ
+                                </div>
+                                <div class="hadits-transliterasi">
+                                    "Lā tabi' mā laisa 'indaka."
+                                </div>
+                                <div class="hadits-terjemahan">
+                                    "Janganlah engkau menjual barang yang tidak ada di sisimu (belum engkau miliki)."
+                                </div>
+                                <div class="hadits-sumber">HR. Abu Dawud, No. 3503</div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1001,7 +1100,7 @@
     <div class="section-divider"></div>
 
     <!-- Referensi & Glosarium -->
-    <section class="referensi-section" id="referensi">
+    <section class="referensi-section main-tab-section" id="referensi">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <div class="section-badge">📚 Rujukan & Tools</div>
@@ -1153,7 +1252,7 @@
     <div class="section-divider"></div>
 
     <!-- ============ FORUM DISKUSI INTERAKTIF ============ -->
-    <section class="forum-section" id="forum">
+    <section class="forum-section main-tab-section" id="forum">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <div class="section-badge">💬 Forum Konsultasi</div>
@@ -1203,7 +1302,7 @@
     <div class="section-divider"></div>
 
     <!-- ============ TENTANG ============ -->
-    <section class="tentang-section" id="tentang">
+    <section class="tentang-section main-tab-section" id="tentang">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <div class="section-badge">ℹ️ Tentang</div>

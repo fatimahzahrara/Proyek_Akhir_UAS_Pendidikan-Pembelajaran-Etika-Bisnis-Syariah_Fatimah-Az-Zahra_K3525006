@@ -1581,7 +1581,7 @@
                 position: fixed;
                 top: 70px; left: -100%;
                 width: 100%; height: calc(100vh - 70px);
-                background: #0a1628;
+                background: var(--dark-bg);
                 flex-direction: column;
                 justify-content: center;
                 gap: 32px;
@@ -2178,3 +2178,155 @@
                 padding: 24px;
             }
         }
+
+        /* ===== Main Section Tab Routing Styles ===== */
+        .main-tab-hidden {
+            display: none !important;
+        }
+
+        .main-tab-section {
+            padding-top: 140px !important;
+            animation: fadeInMainTab 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes fadeInMainTab {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hide section dividers globally for tab interface */
+        .section-divider {
+            display: none !important;
+        }
+
+        /* ========== THEME TOGGLE BUTTON STYLING ========== */
+        .theme-toggle-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        .theme-toggle-btn:hover {
+            background: var(--gradient);
+            color: #ffffff;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        /* ========== LIGHT MODE VARIABLES OVERRIDES ========== */
+        body.light-theme {
+            --dark-bg: #f8fafc;
+            --dark-card: #ffffff;
+            --dark-card2: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --gold: #b45309;
+            --gold-light: #fef3c7;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --shadow: 0 8px 30px rgba(15, 23, 42, 0.04);
+            --shadow-lg: 0 16px 48px rgba(15, 23, 42, 0.08);
+        }
+
+        /* ========== LIGHT MODE SPECIFIC ADJUSTMENTS ========== */
+        body.light-theme .navbar.scrolled {
+            background: rgba(248, 250, 252, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        body.light-theme .hero-decorations .circle {
+            background: radial-gradient(circle, rgba(29, 158, 117, 0.1) 0%, transparent 70%);
+        }
+        body.light-theme .stats-card,
+        body.light-theme .submodul-card,
+        body.light-theme .detail-text,
+        body.light-theme .quiz-card,
+        body.light-theme .hadits-card,
+        body.light-theme .infographic-box,
+        body.light-theme .studikasus-content,
+        body.light-theme .referensi-card,
+        body.light-theme .download-item,
+        body.light-theme .glosarium-search-container,
+        body.light-theme .glosarium-item,
+        body.light-theme .tentang-card-infographic,
+        body.light-theme .forum-card,
+        body.light-theme .forum-post,
+        body.light-theme .zakat-calculator-card {
+            border-color: rgba(0, 0, 0, 0.08) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02) !important;
+        }
+        body.light-theme input,
+        body.light-theme textarea,
+        body.light-theme select {
+            border: 1px solid rgba(0, 0, 0, 0.12) !important;
+            background: #ffffff !important;
+            color: #0f172a !important;
+        }
+        body.light-theme input:focus,
+        body.light-theme textarea:focus,
+        body.light-theme select:focus {
+            border-color: var(--teal) !important;
+            box-shadow: 0 0 0 3px rgba(29, 158, 117, 0.1) !important;
+        }
+        body.light-theme .timeline-item::before {
+            background: rgba(0, 0, 0, 0.08);
+        }
+        body.light-theme .studikasus-timeline::before {
+            background: linear-gradient(180deg, rgba(29, 158, 117, 0.2), rgba(55, 138, 221, 0.2));
+        }
+        body.light-theme .studikasus-marker {
+            border-color: rgba(29, 158, 117, 0.4);
+            background: #ffffff !important;
+        }
+        body.light-theme .faq-question {
+            border-bottom-color: rgba(0, 0, 0, 0.06);
+        }
+        body.light-theme .faq-answer {
+            background: rgba(0, 0, 0, 0.01);
+        }
+        body.light-theme .step-num {
+            background: rgba(29, 158, 117, 0.1);
+            color: var(--teal);
+        }
+        body.light-theme .zakat-step h6 {
+            color: var(--text-primary);
+        }
+        body.light-theme .zakat-operator {
+            color: var(--text-muted);
+        }
+        body.light-theme .footer {
+            border-top-color: rgba(0, 0, 0, 0.06);
+            background: #f1f5f9;
+        }
+        body.light-theme .topic-umum {
+            background: rgba(0,0,0,0.05);
+            color: var(--text-secondary);
+        }
+        body.light-theme .forum-input-group label {
+            color: var(--text-secondary);
+        }
+        body.light-theme .forum-post-meta {
+            border-bottom-color: rgba(0,0,0,0.06);
+        }
+        body.light-theme .forum-reply {
+            background: rgba(0,0,0,0.02);
+            border-left: 3px solid var(--teal);
+        }
+
