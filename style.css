@@ -1646,11 +1646,11 @@
             pointer-events: none;
         }
         .toast {
-            background: rgba(17, 29, 51, 0.96);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: var(--dark-card2);
+            border: 1px solid var(--glass-border);
             border-left: 4px solid var(--teal);
             color: var(--text-primary);
-            padding: 16px 20px;
+            padding: 14px 18px;
             border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
@@ -1676,23 +1676,47 @@
         }
         .toast-icon {
             font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--teal);
+        }
+        .toast.success .toast-icon {
+            color: var(--success);
+        }
+        .toast.warning .toast-icon, .toast.error .toast-icon, .toast.danger .toast-icon {
+            color: var(--danger);
+        }
+        .toast.download .toast-icon {
+            color: var(--blue);
         }
         .toast-message {
             font-size: 0.88rem;
             line-height: 1.5;
             flex-grow: 1;
+            font-weight: 500;
         }
         .toast-close {
             background: none;
             border: none;
             color: var(--text-muted);
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             cursor: pointer;
             transition: var(--transition);
-            padding: 0 4px;
+            padding: 4px;
+            margin-left: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            border-radius: 50%;
         }
         .toast-close:hover {
             color: var(--text-primary);
+            background: rgba(0, 0, 0, 0.05);
+        }
+        body:not(.light-theme) .toast-close:hover {
+            background: rgba(255, 255, 255, 0.08);
         }
 
         @keyframes toastSlideIn {
@@ -2328,5 +2352,40 @@
         body.light-theme .forum-reply {
             background: rgba(0,0,0,0.02);
             border-left: 3px solid var(--teal);
+        }
+
+        /* Light Theme Contrast and Visibility Adjustments */
+        body.light-theme .btn-outline {
+            border-color: rgba(0, 0, 0, 0.18) !important;
+            color: var(--text-primary) !important;
+        }
+        body.light-theme .btn-outline:hover {
+            background: rgba(29, 158, 117, 0.06) !important;
+        }
+        body.light-theme .tab-nav {
+            background: var(--dark-card2) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+        }
+        body.light-theme .tab-btn:hover {
+            background: rgba(0, 0, 0, 0.04) !important;
+            color: var(--text-primary) !important;
+        }
+        body.light-theme .completion-btn {
+            border-color: rgba(0, 0, 0, 0.18) !important;
+            color: var(--text-secondary) !important;
+        }
+        body.light-theme .completion-btn:hover {
+            background: rgba(29, 158, 117, 0.06) !important;
+            color: var(--text-primary) !important;
+        }
+        body.light-theme .module-completion-action {
+            border-top-color: rgba(0, 0, 0, 0.08) !important;
+        }
+        body.light-theme .forum-divider {
+            background: rgba(0, 0, 0, 0.08) !important;
+        }
+        body.light-theme .toast {
+            border-color: rgba(0, 0, 0, 0.08) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06) !important;
         }
 

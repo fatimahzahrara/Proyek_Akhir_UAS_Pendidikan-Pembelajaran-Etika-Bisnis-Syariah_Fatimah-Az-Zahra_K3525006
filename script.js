@@ -10,11 +10,10 @@ function showToast(message, type = 'info') {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
     
-    let icon = 'ℹ️';
-    if (type === 'success') icon = '✅';
-    else if (type === 'error' || type === 'danger') icon = '⚠️';
-    else if (type === 'warning') icon = '⚠️';
-    else if (type === 'download') icon = '📥';
+    let icon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>';
+    if (type === 'success') icon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
+    else if (type === 'error' || type === 'danger' || type === 'warning') icon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-alert-triangle"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>';
+    else if (type === 'download') icon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>';
     
     toast.innerHTML = `
         <span class="toast-icon">${icon}</span>
@@ -417,7 +416,7 @@ function checkAllQuestions(quizId) {
                 const zakatToPay = netAssets * 0.025; // 2.5%
                 resultHTML += `
                     <div class="result-status success">
-                        <span class="status-icon">💎</span>
+                        <span class="status-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg></span>
                         <div class="status-text">
                             <h6>Wajib Menunaikan Zakat!</h6>
                             <p>Harta bersih Anda (${formatter.format(netAssets)}) telah mencapai atau melebihi batas nisab (${formatter.format(nisabThreshold)}). Zakat yang wajib dikeluarkan (2.5%) adalah:</p>
@@ -430,7 +429,7 @@ function checkAllQuestions(quizId) {
             } else {
                 resultHTML += `
                     <div class="result-status info">
-                        <span class="status-icon">ℹ️</span>
+                        <span class="status-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span>
                         <div class="status-text">
                             <h6>Belum Wajib Zakat Niaga</h6>
                             <p>Harta bersih Anda (${formatter.format(netAssets)}) belum mencapai batas minimal nisab (${formatter.format(nisabThreshold)}). Anda tidak wajib membayar zakat perdagangan untuk tahun ini, namun dianjurkan bersedekah sukarela (Infaq/Shadaqah).</p>
@@ -525,7 +524,7 @@ function checkAllQuestions(quizId) {
                     replyHTML = `
                         <div class="forum-reply">
                             <div class="forum-reply-header">
-                                <span class="forum-replier">👩‍🏫 ${q.reply.replier}</span>
+                                <span class="forum-replier">${q.reply.replier}</span>
                                 <span class="forum-reply-label">${q.reply.role}</span>
                             </div>
                             <p class="forum-reply-text">${q.reply.text}</p>
@@ -543,7 +542,7 @@ function checkAllQuestions(quizId) {
                 html += `
                     <div class="forum-item animate-on-scroll visible">
                         <div class="forum-item-header">
-                            <span class="forum-user">👨‍🎓 ${q.name}</span>
+                            <span class="forum-user">${q.name}</span>
                             <span class="forum-time">${q.time}</span>
                             <span class="forum-badge-topic topic-${q.topic}">${capitalizeFirstLetter(q.topic)}</span>
                         </div>
@@ -557,14 +556,14 @@ function checkAllQuestions(quizId) {
             html += `
                 <div class="forum-item">
                     <div class="forum-item-header">
-                        <span class="forum-user">👨‍🎓 Ahmad Fauzi</span>
+                        <span class="forum-user">Ahmad Fauzi</span>
                         <span class="forum-time">2 jam yang lalu</span>
                         <span class="forum-badge-topic topic-muamalah">Muamalah</span>
                     </div>
                     <p class="forum-question-text">Apakah sah jual beli sistem dropship menurut fiqih muamalah jika penjual belum memegang barangnya secara fisik?</p>
                     <div class="forum-reply">
                         <div class="forum-reply-header">
-                            <span class="forum-replier">👩‍🏫 Fatimah Az-Zahra (Penyusun Modul)</span>
+                            <span class="forum-replier">Fatimah Az-Zahra (Penyusun Modul)</span>
                             <span class="forum-reply-label">Penulis</span>
                         </div>
                         <p class="forum-reply-text">Assalamu'alaikum Ahmad. Jual beli dropship diperbolehkan dalam Islam asal menggunakan skema <strong>Akad Salam</strong> (pesanan berbayar di muka) atau bertindak sebagai agen/makelar (<strong>Samsarah/Wakalah</strong>) resmi dari pemilik barang (supplier). Yang dilarang adalah menjual barang milik orang lain tanpa izin dan tanpa kejelasan akad.</p>
@@ -581,11 +580,11 @@ function checkAllQuestions(quizId) {
             const themeBtn = document.getElementById('themeToggle');
             if (body.classList.contains('light-theme')) {
                 body.classList.remove('light-theme');
-                themeBtn.innerHTML = '☀️ Mode Terang';
+                themeBtn.innerHTML = 'Mode Terang';
                 localStorage.setItem('theme', 'dark');
             } else {
                 body.classList.add('light-theme');
-                themeBtn.innerHTML = '🌙 Mode Gelap';
+                themeBtn.innerHTML = 'Mode Gelap';
                 localStorage.setItem('theme', 'light');
             }
         };
@@ -595,10 +594,10 @@ function checkAllQuestions(quizId) {
         const themeBtn = document.getElementById('themeToggle');
         if (savedTheme === 'light') {
             document.body.classList.add('light-theme');
-            if (themeBtn) themeBtn.innerHTML = '🌙 Mode Gelap';
+            if (themeBtn) themeBtn.innerHTML = 'Mode Gelap';
         } else {
             document.body.classList.remove('light-theme');
-            if (themeBtn) themeBtn.innerHTML = '☀️ Mode Terang';
+            if (themeBtn) themeBtn.innerHTML = 'Mode Terang';
         }
 
         // Initialize features on script load
