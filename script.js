@@ -68,7 +68,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 });
 
 // ===== Main Section Tab Routing Logic =====
-const mainTabIds = ['beranda', 'modul', 'prinsip', 'studikasus', 'referensi', 'forum', 'tentang'];
+const mainTabIds = ['beranda', 'modul', 'materi', 'studikasus', 'tentang'];
 
 function switchMainTab(targetId) {
     if (!mainTabIds.includes(targetId)) return;
@@ -183,7 +183,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 });
 
 function scrollToTab(tabName) {
-    switchMainTab('prinsip');
+    switchMainTab('materi');
     switchTab(tabName);
 }
 
@@ -291,15 +291,23 @@ function checkAllQuestions(quizId) {
 
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
-        });
-
-        // ===== Learning Progress Tracker =====
+        })        // ===== Learning Progress Tracker =====
         let completedModules = JSON.parse(localStorage.getItem('completedModules')) || {
-            pengantar: false,
+            prinsip: false,
             muamalah: false,
-            akhlaq: false,
-            zakat: false
+            penerapan: false,
+            implikasi: false
         };
+
+        function getModuleDisplayName(moduleName) {
+            const names = {
+                prinsip: 'Prinsip',
+                muamalah: 'Muamalah',
+                penerapan: 'Penerapan',
+                implikasi: 'Implikasi'
+            };
+            return names[moduleName] || moduleName;
+        }
 
         function toggleModuleCompletion(moduleName) {
             completedModules[moduleName] = !completedModules[moduleName];
@@ -312,11 +320,11 @@ function checkAllQuestions(quizId) {
                 if (isCompleted) {
                     btn.classList.add('completed');
                     btn.innerHTML = `<span class="icon">✓</span> <span class="text">Modul Selesai Dibaca</span>`;
-                    showToast(`Selamat! Anda telah menyelesaikan modul ${capitalizeFirstLetter(moduleName)}.`, 'success');
+                    showToast(`Selamat! Anda telah menyelesaikan modul ${getModuleDisplayName(moduleName)}.`, 'success');
                 } else {
                     btn.classList.remove('completed');
-                    btn.innerHTML = `<span class="icon">○</span> <span class="text">Tandai Modul ${capitalizeFirstLetter(moduleName)} Selesai</span>`;
-                    showToast(`Status penyelesaian modul ${capitalizeFirstLetter(moduleName)} dibatalkan.`, 'info');
+                    btn.innerHTML = `<span class="icon">○</span> <span class="text">Tandai Modul ${getModuleDisplayName(moduleName)} Selesai</span>`;
+                    showToast(`Status penyelesaian modul ${getModuleDisplayName(moduleName)} dibatalkan.`, 'info');
                 }
             }
         }
@@ -343,13 +351,13 @@ function checkAllQuestions(quizId) {
                             btn.innerHTML = `<span class="icon">✓</span> <span class="text">Modul Selesai Dibaca</span>`;
                         } else {
                             btn.classList.remove('completed');
-                            btn.innerHTML = `<span class="icon">○</span> <span class="text">Tandai Modul ${capitalizeFirstLetter(moduleName)} Selesai</span>`;
+                            btn.innerHTML = `<span class="icon">○</span> <span class="text">Tandai Modul ${getModuleDisplayName(moduleName)} Selesai</span>`;
                         }
                     }
                 });
                 
                 if (completedCount === 0) {
-                    statusText.innerHTML = `Belum ada modul yang diselesaikan. Yuk mulai belajar dari bab <strong>Pengantar</strong>!`;
+                    statusText.innerHTML = `Belum ada modul yang diselesaikan. Yuk mulai belajar dari bab <strong>Prinsip</strong>!`;
                 } else if (completedCount === keys.length) {
                     statusText.innerHTML = `🎉 <strong>Luar biasa!</strong> Anda telah menyelesaikan seluruh materi modul. Silakan uji diri Anda di menu Studi Kasus!`;
                 } else {
@@ -362,217 +370,9 @@ function checkAllQuestions(quizId) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
 
-        // ===== Interactive Zakat Calculator =====
-        function calculateZakat() {
-            const goldPrice = parseFloat(document.getElementById('goldPrice').value) || 0;
-            const cashAsset = parseFloat(document.getElementById('cashAsset').value) || 0;
-            const inventoryAsset = parseFloat(document.getElementById('inventoryAsset').value) || 0;
-            const receivableAsset = parseFloat(document.getElementById('receivableAsset').value) || 0;
-            const debtLiability = parseFloat(document.getElementById('debtLiability').value) || 0;
-            
-            if (goldPrice <= 0) {
-                showToast('Harga emas per gram harus valid!', 'error');
-                return;
-            }
-            
-            const nisabThreshold = 85 * goldPrice; // 85 gram gold
-            const totalAssets = cashAsset + inventoryAsset + receivableAsset;
-            const netAssets = totalAssets - debtLiability;
-            
-            const resultDiv = document.getElementById('zakatResult');
-            resultDiv.style.display = 'block';
-            
-            const formatter = new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-                maximumFractionDigits: 0
-            });
-            
-            let resultHTML = `
-                <div class="result-summary">
-                    <h5>Rincian Perhitungan Zakat:</h5>
-                    <table class="calc-result-table">
-                        <tr>
-                            <td>Total Aset Lancar (Kas + Persediaan + Piutang)</td>
-                            <td>: ${formatter.format(totalAssets)}</td>
-                        </tr>
-                        <tr>
-                            <td>Kewajiban Lancar (Utang Jatuh Tempo)</td>
-                            <td>: <span style="color: var(--danger);">- ${formatter.format(debtLiability)}</span></td>
-                        </tr>
-                        <tr class="highlight-row">
-                            <td><strong>Harta Kena Zakat (Bersih)</strong></td>
-                            <td>: <strong>${formatter.format(netAssets)}</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Nisab Zakat Niaga (85 Gram Emas @ ${formatter.format(goldPrice)})</td>
-                            <td>: ${formatter.format(nisabThreshold)}</td>
-                        </tr>
-                    </table>
-                </div>
-            `;
-            
-            if (netAssets >= nisabThreshold) {
-                const zakatToPay = netAssets * 0.025; // 2.5%
-                resultHTML += `
-                    <div class="result-status success">
-                        <span class="status-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg></span>
-                        <div class="status-text">
-                            <h6>Wajib Menunaikan Zakat!</h6>
-                            <p>Harta bersih Anda (${formatter.format(netAssets)}) telah mencapai atau melebihi batas nisab (${formatter.format(nisabThreshold)}). Zakat yang wajib dikeluarkan (2.5%) adalah:</p>
-                            <h5 class="zakat-value">${formatter.format(zakatToPay)}</h5>
-                            <span class="dalil-note">Dalil: "Ambillah zakat dari sebagian harta mereka..." (QS. At-Taubah: 103)</span>
-                        </div>
-                    </div>
-                `;
-                showToast('Perhitungan selesai: Anda wajib membayar zakat.', 'success');
-            } else {
-                resultHTML += `
-                    <div class="result-status info">
-                        <span class="status-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-info"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg></span>
-                        <div class="status-text">
-                            <h6>Belum Wajib Zakat Niaga</h6>
-                            <p>Harta bersih Anda (${formatter.format(netAssets)}) belum mencapai batas minimal nisab (${formatter.format(nisabThreshold)}). Anda tidak wajib membayar zakat perdagangan untuk tahun ini, namun dianjurkan bersedekah sukarela (Infaq/Shadaqah).</p>
-                        </div>
-                    </div>
-                `;
-                showToast('Perhitungan selesai: Belum mencapai batas nisab.', 'info');
-            }
-            
-            resultDiv.innerHTML = resultHTML;
-            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
 
-        // ===== Forum Diskusi Interaktif =====
-        let forumQuestions = JSON.parse(localStorage.getItem('forumQuestions')) || [];
 
-        function submitForumQuestion() {
-            const nameInput = document.getElementById('forumName');
-            const topicInput = document.getElementById('forumTopic');
-            const questionInput = document.getElementById('forumQuestion');
-            
-            const name = nameInput.value.trim();
-            const topic = topicInput.value;
-            const question = questionInput.value.trim();
-            
-            if (!name || !question) {
-                showToast('Nama dan pertanyaan tidak boleh kosong!', 'warning');
-                return;
-            }
-            
-            const newQuestion = {
-                id: Date.now(),
-                name: name,
-                topic: topic,
-                question: question,
-                time: 'Baru saja',
-                reply: null
-            };
-            
-            forumQuestions.unshift(newQuestion);
-            localStorage.setItem('forumQuestions', JSON.stringify(forumQuestions));
-            
-            renderForumQuestions();
-            
-            // Clear input
-            questionInput.value = '';
-            showToast('Pertanyaan Anda berhasil dikirim ke forum!', 'success');
-            
-            // Simulate auto academic assistant response
-            setTimeout(() => {
-                simulateAcademicReply(newQuestion.id, question);
-            }, 2000);
-        }
-
-        function simulateAcademicReply(questionId, questionText) {
-            const qIndex = forumQuestions.findIndex(q => q.id === questionId);
-            if (qIndex === -1) return;
-            
-            const text = questionText.toLowerCase();
-            let replyText = "Terima kasih atas pertanyaannya. Pertanyaan Anda sangat menarik dan akan didiskusikan oleh tim dosen pembimbing mata kuliah Pendidikan Agama Islam. Tetap pelajari modul untuk info lebih lanjut.";
-            
-            if (text.includes('riba') || text.includes('bunga') || text.includes('bank')) {
-                replyText = "Assalamu'alaikum. Terkait riba/bunga bank, mayoritas ulama kontemporer (termasuk MUI) menyepakati bahwa bunga bank konvensional termasuk kategori riba nasi'ah yang dilarang. Sebagai solusinya, kita diarahkan menggunakan jasa perbankan syariah yang menggunakan akad kemitraan seperti Mudharabah (bagi hasil) atau Murabahah (jual beli marjin) agar terhindar dari ketidakadilan bunga tetap.";
-            } else if (text.includes('dropship') || text.includes('reseller') || text.includes('online')) {
-                replyText = "Assalamu'alaikum. Bisnis online dropship diperbolehkan dalam fiqih muamalah selama rukun dan syaratnya terpenuhi. Anda disarankan bertindak sebagai agen resmi (Wakil) dari supplier dengan akad wakalah bil ujrah (perwakilan dengan komisi), atau menggunakan skema akad Salam di mana pembeli membayar tunai di muka, lalu Anda memesankan barang tersebut dengan spesifikasi yang jelas untuk dikirim ke pembeli.";
-            } else if (text.includes('zakat') || text.includes('niaga') || text.includes('perdagangan')) {
-                replyText = "Assalamu'alaikum. Zakat perdagangan wajib dikeluarkan setahun sekali jika aset lancar dikurangi kewajiban jangka pendek telah mencapai nisab setara 85 gram emas. Tarif zakatnya adalah 2,5% dan disalurkan kepada 8 asnaf berhak (terutama fakir dan miskin untuk pengentasan kemiskinan).";
-            } else if (text.includes('kerugian') || text.includes('rugi') || text.includes('mudharabah') || text.includes('musyarakah')) {
-                replyText = "Assalamu'alaikum. Dalam akad Mudharabah (kemitraan modal 100% sepihak), jika terjadi kerugian bisnis alami (bukan karena kelalaian pengelola), maka kerugian materiil ditanggung sepenuhnya oleh pemilik modal. Sementara pengelola menanggung kerugian hilangnya waktu, tenaga, dan ide. Ini adalah bentuk keadilan distribusi risiko dalam ekonomi Islam.";
-            }
-            
-            forumQuestions[qIndex].reply = {
-                replier: "Asisten Akademik (UNS)",
-                role: "Asisten Dosen",
-                text: replyText
-            };
-            
-            localStorage.setItem('forumQuestions', JSON.stringify(forumQuestions));
-            renderForumQuestions();
-            showToast('Tanggapan baru telah ditambahkan pada pertanyaan Anda.', 'info');
-        }
-
-        function renderForumQuestions() {
-            const forumList = document.getElementById('forumList');
-            if (!forumList) return;
-            
-            let html = '';
-            
-            forumQuestions.forEach(q => {
-                let replyHTML = '';
-                if (q.reply) {
-                    replyHTML = `
-                        <div class="forum-reply">
-                            <div class="forum-reply-header">
-                                <span class="forum-replier">${q.reply.replier}</span>
-                                <span class="forum-reply-label">${q.reply.role}</span>
-                            </div>
-                            <p class="forum-reply-text">${q.reply.text}</p>
-                        </div>
-                    `;
-                } else {
-                    replyHTML = `
-                        <div class="forum-reply-pending">
-                            <span class="pulse-dot"></span>
-                            <span class="pending-text">Menunggu tanggapan dari tim penyusun...</span>
-                        </div>
-                    `;
-                }
-                
-                html += `
-                    <div class="forum-item animate-on-scroll visible">
-                        <div class="forum-item-header">
-                            <span class="forum-user">${q.name}</span>
-                            <span class="forum-time">${q.time}</span>
-                            <span class="forum-badge-topic topic-${q.topic}">${capitalizeFirstLetter(q.topic)}</span>
-                        </div>
-                        <p class="forum-question-text">${q.question}</p>
-                        ${replyHTML}
-                    </div>
-                `;
-            });
-            
-            // Append default static question
-            html += `
-                <div class="forum-item">
-                    <div class="forum-item-header">
-                        <span class="forum-user">Ahmad Fauzi</span>
-                        <span class="forum-time">2 jam yang lalu</span>
-                        <span class="forum-badge-topic topic-muamalah">Muamalah</span>
-                    </div>
-                    <p class="forum-question-text">Apakah sah jual beli sistem dropship menurut fiqih muamalah jika penjual belum memegang barangnya secara fisik?</p>
-                    <div class="forum-reply">
-                        <div class="forum-reply-header">
-                            <span class="forum-replier">Fatimah Az-Zahra (Penyusun Modul)</span>
-                            <span class="forum-reply-label">Penulis</span>
-                        </div>
-                        <p class="forum-reply-text">Assalamu'alaikum Ahmad. Jual beli dropship diperbolehkan dalam Islam asal menggunakan skema <strong>Akad Salam</strong> (pesanan berbayar di muka) atau bertindak sebagai agen/makelar (<strong>Samsarah/Wakalah</strong>) resmi dari pemilik barang (supplier). Yang dilarang adalah menjual barang milik orang lain tanpa izin dan tanpa kejelasan akad.</p>
-                    </div>
-                </div>
-            `;
-            
-            forumList.innerHTML = html;
-        }
+        // ===== Forum Diskusi Interaktif (Removed) =====
 
         // Theme Switcher Functions
         window.toggleTheme = function() {
@@ -602,7 +402,7 @@ function checkAllQuestions(quizId) {
 
         // Initialize features on script load
         updateProgressBar();
-        renderForumQuestions();
+        // Forum rendering removed
 
         // Initialize active main tab based on URL hash immediately
         const initialHash = window.location.hash.substring(1);

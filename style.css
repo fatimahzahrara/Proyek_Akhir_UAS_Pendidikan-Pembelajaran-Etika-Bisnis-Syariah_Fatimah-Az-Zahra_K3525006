@@ -164,10 +164,7 @@
             letter-spacing: -0.5px;
         }
         .navbar-title span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--teal);
         }
         .nav-links {
             display: flex;
@@ -281,10 +278,7 @@
             letter-spacing: -1.5px;
         }
         .gradient-text {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--teal);
         }
         .hero-description {
             font-size: clamp(1rem, 1.2vw, 1.15rem);
@@ -412,10 +406,7 @@
             font-family: var(--font-heading);
             font-size: 2.8rem;
             font-weight: 800;
-            color: transparent;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
+            color: var(--teal);
         }
         .stat-label {
             font-size: 0.92rem;
@@ -573,20 +564,20 @@
         }
         .detail-row {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 60px;
+            grid-template-columns: 1fr;
+            gap: 40px;
             align-items: start;
             margin-bottom: 40px;
         }
         .detail-row.reverse {
-            grid-template-columns: 0.9fr 1.1fr;
+            grid-template-columns: 1fr;
         }
         .detail-row.reverse > .detail-text {
-            grid-column: 2;
+            grid-column: auto;
         }
         .detail-row.reverse > .detail-aside {
-            grid-column: 1;
-            grid-row: 1;
+            grid-column: auto;
+            grid-row: auto;
         }
         .detail-text h3 {
             font-family: var(--font-heading);
@@ -1002,17 +993,15 @@
             align-items: start;
         }
         .studikasus-marker {
-            width: 64px;
-            height: 64px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
-            background: var(--dark-card);
-            border: 2px solid rgba(29,158,117,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
+            background: var(--teal);
+            border: 3px solid var(--dark-bg);
             z-index: 1;
             position: relative;
+            box-shadow: 0 0 0 2px rgba(29,158,117,0.3);
+            margin: 38px auto 0 auto;
         }
         .studikasus-content {
             background: var(--dark-card);
@@ -1317,8 +1306,8 @@
         }
         .tentang-row {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 60px;
+            grid-template-columns: 1fr;
+            gap: 40px;
             align-items: center;
         }
         .tentang-cards-container {
@@ -2316,8 +2305,8 @@
             background: linear-gradient(180deg, rgba(29, 158, 117, 0.2), rgba(55, 138, 221, 0.2));
         }
         body.light-theme .studikasus-marker {
-            border-color: rgba(29, 158, 117, 0.4);
-            background: #ffffff !important;
+            border-color: var(--dark-bg) !important;
+            background: var(--teal) !important;
         }
         body.light-theme .faq-question {
             border-bottom-color: rgba(0, 0, 0, 0.06);
